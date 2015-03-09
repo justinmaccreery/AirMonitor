@@ -46,7 +46,8 @@
                 android:layout_below="@+id/sanpshot_btn"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:textSize="25dp" />
+                android:textSize="25dp"
+                android:layout_marginTop="12dp" />
 
 
             <TextView
@@ -92,6 +93,23 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
                 android:layout_below="@+id/text_sneezing" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Save data"
+                android:id="@+id/button_save_data"
+                android:layout_below="@+id/seekBar_sneezing"
+                android:layout_marginTop="12dp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Contribute data"
+                android:id="@+id/button_contribute_data"
+                android:layout_below="@+id/seekBar_sneezing"
+                android:layout_toRightOf="@id/button_save_data"
+                android:layout_marginTop="12dp" />
 
 
         </RelativeLayout>
