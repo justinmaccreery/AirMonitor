@@ -48,15 +48,51 @@
                 android:layout_alignParentStart="true"
                 android:textSize="25dp" />
 
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1.Irritated Lungs - (Coughing/Wheezing)"
+                android:id="@+id/text_irritated_lungs"
+                android:layout_below="@+id/input_condition"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:textSize="20dp"
+                android:textColor="#0000FF"
+                android:layout_marginTop="12dp"/>
+
             <SeekBar
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/seekBar"
+                android:id="@+id/seekBar_irritated_lungs"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
-                android:layout_below="@+id/input_condition" />
+                android:layout_below="@+id/text_irritated_lungs" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2.Sneezing"
+                android:id="@+id/text_sneezing"
+                android:layout_below="@+id/seekBar_irritated_lungs"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:textSize="20dp"
+                android:textColor="#0000FF"
+                android:layout_marginTop="12dp"/>
+
+            <SeekBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/seekBar_sneezing"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@+id/text_sneezing" />
+
 
         </RelativeLayout>
   </ScrollView>
