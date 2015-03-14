@@ -24,3 +24,6 @@ I've updated the UI to be closer to what we discussed this week:
 The layout of the EMA page still needs some work. I think I need a
 Fragment or something to contain the questionnaire, because the save
 and cancel buttons are overlapping it.
+
+One other note: I've changed the package structure so that it reflects
+the team name instead of an individual member's name.
