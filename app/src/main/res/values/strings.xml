@@ -1,7 +1,37 @@
 <resources>
-    <string name="app_name">AirMonitor</string>
+   <string name="app_name">AirMonitor</string>
 
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
-    <string name="input_condition">Please input the condition:</string>
+   <string name="action_settings">Settings</string>
+
+   <string name="mainScreen_airQualityInset_desc">Live-streamed air quality info</string>
+   <string name="mainScreen_airQualityInset_no_data">No data</string>
+   <string name="mainScreen_airQualityInset_data_header">Air Quality</string>
+   <string name="mainScreen_EMA_button">EMA</string>
+
+   <string name="title_activity_ema_screen">Ecological Momentary Assessment</string>
+
+   <string name="mainScreen_refresh_button">Refresh</string>
+
+   <string name="input_condition">Please input the condition:</string>
+
+   <string name="ema_screen_location_header">Location</string>
+   <string name="ema_screen_in_or_out_text">Are you indoors or outdoors?</string>
+   <string name="ema_screen_in_radio_label">In</string>
+   <string name="ema_screen_out_radio_label">Out</string>
+   <string name="ema_screen_where_text">Where are you?</string>
+   <string name="ema_screen_where_hint">location</string>
+   <string name="ema_screen_what_text">What are you doing?</string>
+   <string name="ema_screen_what_hint">activity</string>
+   <string name="ema_screen_who_text">Who are you with?</string>
+   <string name="ema_screen_who_hint">companions</string>
+   <string name="ema_screen_aq_header">Air quality</string>
+   <string name="ema_screen_aq_awareness">What do you think your current air quality?</string>
+   <string name="ema_screen_aq_belief">The air quality here could hurt my health:</string>
+   <string name="ema_screen_aq_intent">Will you change location to get to cleaner air?</string>
+   <string name="ema_screen_aq_behave">Since the last report, did you change location to get to cleaner air? </string>
+   <string name="ema_screen_aq_barrier">If you did not move to get to cleaner air but wanted to, what got in the way?</string>
+   <string name="ema_screen_aq_barrier_hint">barriers</string>
+   <string name="ema_screen_save_button">Save</string>
+   <string name="ema_screen_cancel_button">Cancel</string>
+
 </resources>
