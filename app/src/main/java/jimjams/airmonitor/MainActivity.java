@@ -13,6 +13,8 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import jimjams.airmonitor.sensordata.SensorData;
 import jimjams.airmonitor.sensordata.SensorDataGenerator;
 
@@ -25,7 +27,6 @@ public class MainActivity extends ActionBarActivity {
       setContentView(R.layout.activity_main);
       refreshAQInset();
    }
-
 
    @Override
    public boolean onCreateOptionsMenu(Menu menu) {
@@ -53,7 +54,10 @@ public class MainActivity extends ActionBarActivity {
     * Refreshes current air quality data in the AirQualityInset.
     */
    private void refreshAQInset() {
-      SensorData[] data = SensorDataGenerator.getInstance().getData();
+      // Get updated data
+      ArrayList<SensorData> data = SensorDataGenerator.getInstance().getData();
+
+      // Create and populate a table
       TableLayout aqi = (TableLayout)findViewById(R.id.mainScreen_airQualityInset);
       aqi.removeAllViews();
 
@@ -64,7 +68,7 @@ public class MainActivity extends ActionBarActivity {
       TextView tv = new TextView(this);
       tv.setTypeface(tv.getTypeface(), Typeface.BOLD);
 
-      if(data == null || data.length == 0) {
+      if(data == null || data.size() == 0) {
          tv.setText(getResources().getString(R.string.mainScreen_airQualityInset_no_data));
          header.addView(tv);
          aqi.addView(header);
@@ -86,25 +90,6 @@ public class MainActivity extends ActionBarActivity {
             aqi.addView(tr);
          }
       }
-
-/*
-      String aqOutput;
-      if(data == null || data.length == 0) {
-         aqOutput = "No data";
-      }
-      else {
-         aqOutput = "";
-         for (int i = 0; i < data.length; i++) {
-            SensorData sd = data[i];
-            if (i > 0) {
-               aqOutput += "\n";
-            }
-            aqOutput += sd.getDisplayName() + ": " + df2.format(sd.getValue());
-         }
-      }
-      TextView aqi = (TextView)findViewById(R.id.mainScreen_airQualityInset);
-      aqi.setText(aqOutput);
-*/
    }
 
    /**

@@ -4,7 +4,7 @@ import java.text.DecimalFormat;
 
 /**
  * Represents a single data reading from a single sensor.
- * @author Sean McCooey
+ * @author Sean
  */
 public class SensorData {
 
@@ -44,12 +44,14 @@ public class SensorData {
     * @param shortName     Short name for the data
     * @param value         Value of the reading
     * @param decimalPlaces Number of decimal places to be used in displayValue
+    * @param unit          Unit of measure
     */
-   public SensorData(String displayName, String shortName, double value, int decimalPlaces) {
+   public SensorData(String displayName, String shortName, double value, int decimalPlaces,
+                     String unit) {
       this.displayName = displayName;
       this.shortName = shortName;
       this.value = value;
-      this.displayValue = df[decimalPlaces].format(value);
+      this.displayValue = df[decimalPlaces].format(value) + unit;
    }
 
    /**
