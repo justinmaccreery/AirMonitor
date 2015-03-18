@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class EcologicalMomentaryAssessment {
 
    /**
-    * true if the user indicates that s/he is indoors
+    * true if the user indicates that s/he is indoors; false otherwise
     */
    private boolean indoors;
 
@@ -30,17 +30,17 @@ public class EcologicalMomentaryAssessment {
    private ArrayList<String> companions;
 
    /**
-    * The user's subjective report of the current air quality, ona scale of 1 to 10
+    * The user's subjective report of the current air quality, on a scale of 1 to 10
     */
    private int airQuality;
 
    /**
-    * The user's belief that the current environment will hurt his/her health
+    * The user's belief that the current environment will hurt his/her health, on a scale of 1 to 10
     */
    private int belief;
 
    /**
-    * Likelihood the user will relocate for cleaner air
+    * Likelihood the user will relocate for cleaner air, on a scale of 1 to 10
     */
    private int intention;
 
@@ -156,5 +156,31 @@ public class EcologicalMomentaryAssessment {
     */
    public String getBarrier() {
       return barrier;
+   }
+
+   /**
+    * Returns a String representation of the EMA.
+    * @return A String representation of the EMA
+    */
+   public String toString() {
+      String result = "reportedLocation: " + reportedLocation + " (" +
+            (indoors ? "in" : "out") + "doors); ";
+      result += "activity: " + activity + "; ";
+      result += "companions: ";
+      if(companions.size() == 0) {
+         result += "none";
+      }
+      for(int i = 0; i < companions.size(); i++) {
+         if(i != 0) {
+            result += ", ";
+         }
+         result += "\"" + companions.get(i) + "\"";
+      }
+      result += "; airQuality: " + airQuality + "; ";
+      result += "belief: " + belief + "; ";
+      result += "intention: " + intention + "; ";
+      result += "behavior: " + behavior + "; ";
+      result += "barrier: " + barrier + "; ";
+      return result;
    }
 }

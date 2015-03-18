@@ -10,6 +10,9 @@ import java.util.ArrayList;
  */
 public class Profile {
 
+   /**
+    * Used to identify source class for log
+    */
    private String className = getClass().getSimpleName();
 
    /**
@@ -49,17 +52,25 @@ public class Profile {
     */
    public void addCondition(ExistingCondition condition) {
       boolean duplicate = false;
+      boolean empty = false;
+      if(condition.getName().trim().length() == 0) {
+         empty = true;
+      }
       for(ExistingCondition existing: conditions) {
          if(existing.equals(condition)) {
             duplicate = true;
          }
       }
-      if(!duplicate) {
-         conditions.add(condition);
-         Log.i(className, "Adding " + condition.getName() + ".");
+
+      if(duplicate) {
+         Log.v(className, "Failed to add " + condition.getName() + " (duplicate).");
+      }
+      else if(empty) {
+         Log.v(className, "Failed to add " + condition.getName() + " (empty).");
       }
       else {
-         Log.i(className, "Failed to add " + condition.getName() + " (duplicate).");
+         conditions.add(condition);
+         Log.v(className, "Adding " + condition.getName() + ".");
       }
    }
 
@@ -77,10 +88,10 @@ public class Profile {
     */
    public void removeCondition(ExistingCondition condition) {
       if(conditions.remove(condition)) {
-         Log.i(className, "Removing " + condition.getName() + ".");
+         Log.v(className, "Removing " + condition.getName() + ".");
       }
       else {
-         Log.i(className, "Failed to remove " + condition.getName() + ".");
+         Log.v(className, "Failed to remove " + condition.getName() + ".");
       }
    }
 

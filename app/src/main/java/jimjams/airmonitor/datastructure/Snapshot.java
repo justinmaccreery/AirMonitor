@@ -3,6 +3,7 @@ package jimjams.airmonitor.datastructure;
 import android.content.Context;
 import android.location.Location;
 import android.location.LocationManager;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,6 +17,8 @@ import jimjams.airmonitor.sensordata.SensorData;
  * @author Sean
  */
 public class Snapshot {
+
+   private String className = getClass().getSimpleName();
 
    /**
     * The time when the Snapshot was taken
@@ -111,5 +114,27 @@ public class Snapshot {
     */
    public EcologicalMomentaryAssessment getEma() {
       return ema;
+   }
+
+   /**
+    * Returns a String representation of the Snapshot.
+    * @return String representation of the Snapshot
+    */
+   public String toString() {
+      String result = "timestamp: " + timestamp + "; ";
+      result += "location: " + location + "; ";
+      result += "conditions: ";
+      if(conditions.size() == 0) {
+         result += "none";
+      }
+      for(int i = 0; i < conditions.size(); i++) {
+         if(i != 0) {
+            result += ", ";
+         }
+         result += conditions.get(i).getName();
+      }
+      result += "; ";
+      result += ema;
+      return result;
    }
 }

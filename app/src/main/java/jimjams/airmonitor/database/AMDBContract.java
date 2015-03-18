@@ -9,99 +9,190 @@ import android.provider.BaseColumns;
 public interface AMDBContract {
 
    /**
+    * Database path
+    */
+   public final static String DB_PATH = "/data/data/jimjams.airmonitor";
+
+   /**
+    * Database name
+    */
+   public final static String DB_NAME = "AirMonitor";
+
+   /**
     * Database filename
     */
-   public static String DB_NAME = "AirMonitor.db";
+   public final static String DB_FILENAME = DB_NAME + ".db";
 
    /**
     * Database version number
     */
-   public static int DB_VERSION = 1;
+   public final static int DB_VERSION = 1;
 
    /**
-    * Column name for ID
+    * "Create if no exist" string
     */
-   public static final String COLUMN_NAME_ID = "id";
-
-   /**
-    * Column type for ID
-    */
-   public static final String COLUMN_TYPE_ID = "NOT NULL";
+   public final static String CREATE = "CREATE TABLE IF NOT EXISTS ";
 
    /**
     * Primary key instruction
     */
-   public static final String PRIMARY_KEY = "PRIMARY_KEY(" + COLUMN_NAME_ID + ");";
+   // public static final String PRIMARY_KEY = "PRIMARY_KEY(" + "id" + ");";
+   public static final String PRIMARY_KEY = "";
 
+   /**
+    * Database table containing Profile data. Note that the id column will <b>not</b> be
+    * autoincremented; it will initially be 0 and may be updated at a later time if server-side
+    * data storage is implemented.
+    */
    public static final class ProfileTable implements BaseColumns {
+
+      /**
+       * Name of the table
+       */
       public static final String TABLE_NAME = "profile";
 
-      public static final String COLUMN_NAME_CONDITIONS = "conditions";
-
-      public static final String COLUMN_TYPE_CONDITIONS = "ARRAY";
-
-      public static final String TABLE_CREATE = "CREATE TABLE " + TABLE_NAME + "(" +
-            COLUMN_NAME_ID + " " + COLUMN_TYPE_ID + ", " +
-            COLUMN_NAME_CONDITIONS  + " " + COLUMN_TYPE_CONDITIONS + ", " +
-            PRIMARY_KEY;
+      /**
+       * Columns in the table:
+       * <dl>
+       *    <dt>id</dt>
+       *    <dd>Unique id for the record</dd>
+       *    <dt>conditions</dt>
+       *    <dd>Array of existing conditions</dd>
+       * </dl>
+       */
+      public static final String[][] COLUMNS = {
+         { "id", "INTEGER PRIMARY KEY" },
+         { "conditions", "TEXT" }
+      };
    }
 
+   /**
+    * Database containing EMA data
+    */
    public static final class EMATable implements BaseColumns {
+
+      /**
+       * Name of the table
+       */
       public static final String TABLE_NAME = "ema";
 
-      public static final String COLUMN_NAME_INDOORS = "indoors";
-      public static final String COLUMN_NAME_REPORTED_LOCATION = "reportedLocation";
-      public static final String COLUMN_NAME_ACTIVITY = "activity";
-      public static final String COLUMN_NAME_COMPANIONS = "companions";
-      public static final String COLUMN_NAME_AIR_QUALITY = "airQuality";
-      public static final String COLUMN_NAME_BELIEF = "belief";
-      public static final String COLUMN_NAME_INTENTION = "intention";
-      public static final String COLUMN_NAME_BEHAVIOR = "behavior";
-      public static final String COLUMN_NAME_BARRIER = "barrier";
-
-      public static final String COLUMN_TYPE_INDOORS = "BOOLEAN";
-      public static final String COLUMN_TYPE_REPORTED_LOCATION = "TEXT";
-      public static final String COLUMN_TYPE_ACTIVITY = "TEXT";
-      public static final String COLUMN_TYPE_COMPANIONS = "ARRAY";
-      public static final String COLUMN_TYPE_AIR_QUALITY = "INTEGER";
-      public static final String COLUMN_TYPE_BELIEF = "INTEGER";
-      public static final String COLUMN_TYPE_INTENTION = "INTEGER";
-      public static final String COLUMN_TYPE_BEHAVIOR = "BOOLEAN";
-      public static final String COLUMN_TYPE_BARRIER = "TEXT";
-
-      public static final String TABLE_CREATE = "CREATE TABLE " + TABLE_NAME + "(" +
-            COLUMN_NAME_ID + " " + COLUMN_TYPE_ID + ", " +
-            COLUMN_NAME_INDOORS + " " + COLUMN_TYPE_INDOORS + ", " +
-            COLUMN_NAME_REPORTED_LOCATION + " " + COLUMN_TYPE_REPORTED_LOCATION + ", " +
-            COLUMN_NAME_ACTIVITY + " " + COLUMN_TYPE_ACTIVITY + ", " +
-            COLUMN_NAME_COMPANIONS + " " + COLUMN_TYPE_COMPANIONS + ", " +
-            COLUMN_NAME_AIR_QUALITY + " " + COLUMN_TYPE_AIR_QUALITY + ", " +
-            COLUMN_NAME_BELIEF + " " + COLUMN_TYPE_BELIEF + ", " +
-            COLUMN_NAME_INTENTION + " " + COLUMN_TYPE_INTENTION + ", " +
-            COLUMN_NAME_BEHAVIOR + " " + COLUMN_TYPE_BEHAVIOR + ", " +
-            COLUMN_NAME_BARRIER + " " + COLUMN_TYPE_BARRIER + ", " +
-            PRIMARY_KEY;
+      /**
+       * Columns in the table:
+       * <dl>
+       *    <dt>id</dt>
+       *    <dd>Unique id for the record</dd>
+       *    <dt>indoors</dt>
+       *    <dd>true if the user indicates that s/he is indoors; false otherwise</dd>
+       *    <dt>reportedLocation</dt>
+       *    <dd>reportedLocation</dd>
+       *    <dt>The user's self-reported location. Not to be confused with the Snapshot's location
+       *        field</dt>
+       *    <dd>activity</dd>
+       *    <dt>The user's self-reported activity at the time of the Snapshot</dt>
+       *    <dd>companions</dd>
+       *    <dt>The user's report of who s/he is with at the time of the Snapshot, as an array of
+       *        Strings</dt>
+       *    <dd>airQuality</dd>
+       *    <dt>The user's subjective report of the current air quality, on a scale of 1 to 10</dt>
+       *    <dd>belief</dd>
+       *    <dt>The user's belief that the current environment will hurt his/her health, on a scale
+       *        of 1 to 10</dt>
+       *    <dd>intention</dd>
+       *    <dt>Likelihood the user will relocate for cleaner air, on a scale of 1 to 10</dt>
+       *    <dd>behavior</dd>
+       *    <dt>true if the user has changed location for better air since the last report</dt>
+       *    <dd>barrier</dd>
+       *    <dt>The user's report of what prevented him/her from relocating.</dt>
+       * </dl>
+       */
+      public static final String[][] COLUMNS = {
+         { "id", "INTEGER PRIMARY KEY AUTOINCREMENT" },
+         { "indoors", "BOOLEAN" },
+         { "reportedLocation", "TEXT" },
+         { "activity", "TEXT" },
+         { "companions", "ARRAY" },
+         { "airQuality", "INTEGER" },
+         { "belief", "INTEGER" },
+         { "intention", "INTEGER" },
+         { "behavior", "BOOLEAN" },
+         { "barrier", "TEXT" },
+      };
    }
 
-
+   /**
+    * Database containing Snapshot data
+    */
    public static final class SnapshotTable implements BaseColumns {
+
+      /**
+       * Name of the table
+       */
       public static final String TABLE_NAME = "snapshot";
 
-      public static final String COLUMN_NAME_LOCATION = "location";
-      public static final String COLUMN_NAME_DATA = "data";
-      public static final String COLUMN_NAME_CONDITIONS = "conditions";
-      public static final String COLUMN_NAME_EMA = "ema";
+      /**
+       * Columns in the table:
+       * <dl>
+       *    <dt>id</dt>
+       *    <dd>Unique id for the record</dd>
+       *    <dt>userId</dt>
+       *    <dd>ID of the user creating the Snapshot</dd>
+       *    <dt>timestamp</dt>
+       *    <dd>The time when the Snapshot was taken. Stored as a long</dd>
+       *    <dt>location</dt>
+       *    <dd>Location where the Snapshot was taken</dd>
+       *    <dt>sensorDataSensor</dt>
+       *    <dd>Sensor Data at the time when the Snapshot was taken. This is a reference to the IDs
+       *        of the corresponding records in the SensorData table.</dd>
+       *    <dt>conditions</dt>
+       *    <dd>Array of Strings representing existing conditions reported by the user at the time
+       *        of the Snapshot</dd>
+       *    <dt>ema</dt>
+       *    <dd>Reference to the ID of the corresponding EMA in the EMATable</dd>
+       * </dl>
+       */
+      public static final String[][] COLUMNS = {
+         { "id", "INTEGER PRIMARY KEY AUTOINCREMENT" },
+         { "userId", "INTEGER" },
+         { "timestamp", "INTEGER" },
+         { "location", "TEXT" },
+         { "sensorData", "ARRAY" },
+         { "conditions", "ARRAY" },
+         { "ema", "INTEGER" }
+      };
+   }
 
-      public static final String COLUMN_TYPE_LOCATION = "location";
-      public static final String COLUMN_TYPE_DATA = "data";
-      public static final String COLUMN_TYPE_CONDITIONS = "conditions";
-      public static final String COLUMN_TYPE_EMA = "ema";
+   /**
+    * Database containing Sensor data. Each record contains data from a single sensor at the time of
+    * a single Snapshot.
+    */
+   public static final class SensorDataTable implements BaseColumns {
 
-      public static final String TABLE_CREATE = "CREATE TABLE " + TABLE_NAME + "(" +
-            COLUMN_NAME_LOCATION + " " + COLUMN_TYPE_LOCATION + ", " +
-            COLUMN_NAME_DATA + " " + COLUMN_TYPE_DATA + ", " +
-            COLUMN_NAME_CONDITIONS + " " + COLUMN_TYPE_CONDITIONS + ", " +
-            COLUMN_NAME_EMA + " " + COLUMN_TYPE_EMA + ", " +
-            PRIMARY_KEY;
+      /**
+       * Name of the table
+       */
+      public static final String TABLE_NAME = "sensor";
+
+      /**
+       * Columns in the table:
+       * <dl>
+       *    <dt>id</dt>
+       *    <dd>Unique id for the record</dd>
+       *    <dt>displayName</dt>
+       *    <dd>Display name for the data</dd>
+       *    <dt>shortName</dt>
+       *    <dd>Short name for the data</dd>
+       *    <dt>value</dt>
+       *    <dd>Numerical value of the data</dd>
+       *    <dt>getDisplayValue</dt>
+       *    <dd>Display value of the reading</dd>
+       * </dl>
+       */
+      public static final String[][] COLUMNS = {
+         { "id", "INTEGER PRIMARY KEY AUTOINCREMENT" },
+         { "displayName", "TEXT" },
+         { "shortName", "TEXT" },
+         { "value", "DOUBLE" },
+         { "displayValue", "TEXT" }
+      };
    }
 }
