@@ -15,7 +15,7 @@
                android:layout_alignParentLeft="true"
                android:layout_alignParentStart="true">
 
-      <RelativeLayout android:layout_width="wrap_content"
+      <RelativeLayout android:layout_width="match_parent"
                       android:layout_height="wrap_content"
                       android:paddingLeft="@dimen/activity_horizontal_margin"
                       android:paddingRight="@dimen/activity_horizontal_margin"
@@ -251,6 +251,44 @@
                    android:hint="@string/ema_screen_aq_barrier_hint"
                    android:paddingLeft="12dp"
                    android:paddingRight="3dp"/>
+
+         <!-- Existing conditions -->
+         <TextView android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="@string/ema_screen_existing_header"
+                   android:id="@+id/ema_screen_existing_header"
+                   android:layout_below="@id/ema_screen_aq_barrier_input"
+                   android:layout_alignParentLeft="true"
+                   android:layout_alignParentStart="true"
+                   android:textSize="20sp"
+                   android:textColor="#000000"
+                   android:layout_marginTop="12dp"/>
+
+         <!-- Container for list of existing conditions, which will be added and updated
+              dynamically. Each new condition will be added in its own TableRow. -->
+         <TableLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_below="@id/ema_screen_existing_header"
+                      android:id="@+id/ema_screen_existing_table">
+
+            <TableRow android:id="@+id/ema_screen_existing_header_row">
+               <EditText android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:textSize="16sp"
+                         android:id="@+id/ema_screen_existing_input"
+                         android:hint="@string/ema_screen_aq_existing_hint"
+                         android:paddingLeft="12dp"
+                         android:paddingRight="3dp"/>
+
+                  <Button android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_gravity="end"
+                          android:text="@string/ema_screen_existing_add_button"
+                          android:onClick="on_EMA_Screen_add_button_click"/>
+            </TableRow>
+
+         </TableLayout>
+
       </RelativeLayout>
    </ScrollView>
 
@@ -258,14 +296,14 @@
    <Button android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:text="@string/ema_screen_save_button"
-           android:onClick="on_EMA_Screen_save_button_Click"
+           android:onClick="on_EMA_Screen_save_button_click"
            android:layout_alignParentBottom="true"
            android:layout_alignParentRight="true"/>
    <!-- Cancel -->
    <Button android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:text="@string/ema_screen_cancel_button"
-           android:onClick="on_EMA_Screen_cancel_button_Click"
+           android:onClick="on_EMA_Screen_cancel_button_click"
            android:layout_alignParentBottom="true"
            android:layout_alignParentLeft="true"/>
 </RelativeLayout>

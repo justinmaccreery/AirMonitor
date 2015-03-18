@@ -16,6 +16,13 @@ public class SensorDataGenerator {
    private static SensorDataGenerator instance = null;
 
    /**
+    * Chance for a given DataCategory to be used returned by {@link getData()}.
+    * This value can be adjusted to allow differnt arrangements of test data.
+    * Value should be from 0 - 1.
+    */
+   private final static double RETURN_CHANCE = 1;
+
+   /**
     * Data categories to be generated
     */
    DataCategory[] dataCats = {
@@ -50,7 +57,7 @@ public class SensorDataGenerator {
    public ArrayList<SensorData> getData() {
       ArrayList<SensorData> data = new ArrayList<>();
       for(DataCategory dataCat: dataCats) {
-         if(rand(0, 1) > 0.2) {
+         if(rand(0, 1) < RETURN_CHANCE) {
             data.add(new SensorData(dataCat.displayName, dataCat.shortName,
                   rand(dataCat.min, dataCat.max), dataCat.decimalPlaces,
                   dataCat.unit));

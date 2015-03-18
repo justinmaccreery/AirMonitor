@@ -36,4 +36,9 @@
    <string name="ema_screen_save_button">Save</string>
    <string name="ema_screen_cancel_button">Cancel</string>
 
+   <string name="ema_screen_existing_header">Existing conditions</string>
+   <string name="ema_screen_aq_existing_hint">existing condition</string>
+   <string name="ema_screen_existing_add_button">Add</string>
+
+
 </resources>

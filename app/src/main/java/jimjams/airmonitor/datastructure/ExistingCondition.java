@@ -12,6 +12,14 @@ public class ExistingCondition {
    private String name;
 
    /**
+    * Constructor.
+    * @param name The condition's name
+    */
+   public ExistingCondition(String name) {
+      this.name = name;
+   }
+
+   /**
     * Returns the name of the condition.
     * @return The name of the condition
     */
