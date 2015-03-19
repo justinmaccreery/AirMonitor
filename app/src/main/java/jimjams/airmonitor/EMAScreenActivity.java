@@ -19,6 +19,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import jimjams.airmonitor.database.AMDBContract;
 import jimjams.airmonitor.database.DBAccess;
 import jimjams.airmonitor.datastructure.EcologicalMomentaryAssessment;
 import jimjams.airmonitor.datastructure.ExistingCondition;
@@ -64,18 +65,39 @@ public class EMAScreenActivity extends ActionBarActivity {
    }
 
    /**
+    * Overrides default method to populate existing conditions list.
+    */
+   protected void onStart() {
+      super.onStart();
+      Log.d(className, DBAccess.getDBAccess().toString(AMDBContract.ProfileTable.TABLE_NAME));
+      refreshExistingConditions();
+   }
+
+   /**
     * Invoked when the save button on the EMA screen is clicked. Generates a Snapshot based on
     * current sensor data, the user's existing conditions, and the results of the EMA.
     * @param saveBtn The save button
     */
    public void on_EMA_Screen_save_button_click(View saveBtn) {
+      // Allows database access
+      DBAccess access = DBAccess.getDBAccess();
+
+      // Current profile
       Profile profile = Profile.getProfile();
+
+      // Current set of sensor data
       ArrayList<SensorData> data = SensorDataGenerator.getInstance().getData();
+
+      // Current set of existing conditions, taken from the Profile (note that the Profile is
+      // updated every time a condition is added or deleted)
       ArrayList<ExistingCondition> conditions = profile.getConditions();
+
+      // Current EMA, taken from the EMA screen
       EcologicalMomentaryAssessment ema = getEma();
+
       Snapshot snapshot = new Snapshot(data, conditions, ema, this);
-      Log.v(className, snapshot.toString());
-      DBAccess.getDBAccess();
+      long snapshotId = access.saveSnapshot(snapshot);
+      Log.d(className, snapshot.toString());
    }
 
    /**
@@ -84,7 +106,7 @@ public class EMAScreenActivity extends ActionBarActivity {
     */
    private EcologicalMomentaryAssessment getEma() {
 
-      Log.v(className, "Creating EMA.");
+      Log.d(className, "Creating EMA.");
 
       // Get the indoors value
       RadioGroup indoorsRg = (RadioGroup)findViewById(R.id.ema_screen_in_or_out_group);
@@ -151,6 +173,7 @@ public class EMAScreenActivity extends ActionBarActivity {
       EditText input = (EditText)findViewById(R.id.ema_screen_existing_input);
       Profile.getProfile().addCondition(normalize(input.getText().toString()));
       ((EditText)findViewById(R.id.ema_screen_existing_input)).setText("");
+      DBAccess.getDBAccess().updateProfile();
       refreshExistingConditions();
    }
 
@@ -158,7 +181,7 @@ public class EMAScreenActivity extends ActionBarActivity {
     * Refreshes the list of existing conditions based on profile.
     */
    private void refreshExistingConditions() {
-      Log.v(className, "Refreshing existing conditions list.");
+      Log.d(className, "Refreshing existing conditions list.");
       Profile profile = Profile.getProfile();
       TableLayout layout = (TableLayout)findViewById(R.id.ema_screen_existing_table);
 
@@ -201,6 +224,7 @@ public class EMAScreenActivity extends ActionBarActivity {
       public void onClick(View v) {
          DeleteButton btn = (DeleteButton)v;
          Profile.getProfile().removeCondition(btn.getCondition());
+         DBAccess.getDBAccess().updateProfile();
          refreshExistingConditions();
       }
    }
@@ -225,11 +249,6 @@ public class EMAScreenActivity extends ActionBarActivity {
          this.condition = condition;
          setText("X");
       }
-
-      /**
-       * Invoked when an associated DeleteButton is clicked.
-       * @param view The associated DeleteButton
-       */
 
       /**
        * Returns the associated condition.

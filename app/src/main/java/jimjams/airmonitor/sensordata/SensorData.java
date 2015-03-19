@@ -55,28 +55,32 @@ public class SensorData {
    }
 
    /**
-    * Returns the display name for the data
+    * Returns the display name for the data.
+    * @return The display name for the data
     */
    public String getDisplayName() {
       return displayName;
    }
 
    /**
-    * Returns the short name for the data
+    * Returns the short name for the data.
+    * @return The short name for the data
     */
    public String getShortName() {
       return shortName;
    }
 
    /**
-    * Returns the value of the reading
+    * Returns the value of the reading.
+    * @return The value of the reading
     */
    public double getValue() {
       return value;
    }
 
    /**
-    * Returns the display value of the reading
+    * Returns the display value of the reading.
+    * @return The display value of the reading
     */
    public String getDisplayValue() {
       return displayValue;

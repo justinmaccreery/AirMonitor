@@ -35,4 +35,12 @@ public class ExistingCondition {
    public boolean equals(ExistingCondition other) {
       return this.name.equalsIgnoreCase(other.name);
    }
+
+   /**
+    * Returns the name of the condition.
+    * @return The name of the condition
+    */
+   public String toString() {
+      return name;
+   }
 }
