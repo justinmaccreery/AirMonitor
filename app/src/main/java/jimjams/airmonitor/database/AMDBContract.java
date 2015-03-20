@@ -4,7 +4,6 @@ import android.provider.BaseColumns;
 
 /**
  * AirMonitor database contract.
- * @author Sean
  */
 public interface AMDBContract {
 

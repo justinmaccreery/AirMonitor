@@ -5,7 +5,6 @@ import java.util.ArrayList;
 /**
  * An Ecological Momentary Assessment, representing the user's personal assessment of the
  * environment at the time when a Snapshot is taken.
- * @author Sean
  */
 public class EcologicalMomentaryAssessment {
 

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,7 +18,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import jimjams.airmonitor.database.AMDBContract;
 import jimjams.airmonitor.database.DBAccess;
 import jimjams.airmonitor.datastructure.EcologicalMomentaryAssessment;
 import jimjams.airmonitor.datastructure.Profile;
@@ -99,6 +97,10 @@ public class
       long snapshotId = access.saveSnapshot(snapshot);
       // Log.d(className, snapshot.toString());
       // Log.d(className, DBAccess.getDBAccess().toString(AMDBContract.SnapshotTable.TABLE_NAME));
+
+      // Return to main screen
+      Intent intent = new Intent(this, MainActivity.class);
+      startActivity(intent);
    }
 
    /**

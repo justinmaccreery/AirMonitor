@@ -6,7 +6,6 @@ import java.util.ArrayList;
  * Generates random sensor sensor data to test app. This class uses the singleton pattern and a
  * private constructor. Use {@link #getInstance()} to access the <code>SensorDataGenerator</code>
  * object.
- * @author Sean
  */
 public class SensorDataGenerator {
 

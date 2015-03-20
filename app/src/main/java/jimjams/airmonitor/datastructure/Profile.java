@@ -9,7 +9,6 @@ import jimjams.airmonitor.database.DBAccess;
 
 /**
  * User profile.
- * @author Sean
  */
 public class Profile {
 

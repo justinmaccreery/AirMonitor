@@ -4,7 +4,6 @@ import java.text.DecimalFormat;
 
 /**
  * Represents a single data reading from a single sensor.
- * @author Sean
  */
 public class SensorData {
 

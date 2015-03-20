@@ -27,7 +27,9 @@ public class HistoryActivity extends ActionBarActivity {
 
    final private static int FONT_UNIT = android.util.TypedValue.COMPLEX_UNIT_SP;
 
-   final private static float FONT_SIZE = 20;
+   final private static float LABEL_FONT_SIZE = 20;
+
+   final private static float TABLE_FONT_SIZE = 14;
 
    /**
     * Value used to indent a subcategory under its parent
@@ -79,15 +81,16 @@ public class HistoryActivity extends ActionBarActivity {
    }
 
    /**
-   * <p>A note on the use of tags in this method: TextViews describing Snapshots and their
-   *    subcategories act as buttons which can expand and collapse their subcategories. Tags allow
-   *    OnClickListeners to manage this. The tag on the TextView is a Boolean indicating whether
-   *    the node is currently expanded. The tag on the containing layout is an ArrayList of hidable
-   *    child elements. When the TextView is clicked, the Boolean tag is checked, and the child
-   *    elements in the parent's tag are either hidden or shown, and the Boolean is toggled.</p>
-   * <p>This method is needlessly long and badly needs to be broken down into smaller pieces, but
-   *    it's late and I'm tired.</p>
-   */
+    * <p>A note on the use of tags in this method: TextViews describing Snapshots and their
+    *    subcategories act as buttons which can expand and collapse their subcategories. Tags allow
+    *    OnClickListeners to manage this. The tag on the TextView is a Boolean indicating whether
+    *    the node is currently expanded. The tag on the containing layout is an ArrayList of
+    *    expandable/collapsible child elements. When the TextView is clicked, the Boolean tag is
+    *    checked, and the child elements in the parent's tag are either hidden or shown, and the
+    *    Boolean tag is toggled.</p>
+    * <p>This method is needlessly long and badly needs to be broken down into smaller pieces, but
+    *    it's late and I'm tired.</p>
+    */
    private void populateHistory() {
 
       Log.d(className, DBAccess.getDBAccess().toString(AMDBContract.SnapshotTable.TABLE_NAME));
@@ -102,7 +105,7 @@ public class HistoryActivity extends ActionBarActivity {
       // Add user id row
       TextView userIdRow = new TextView(this);
       userIdRow.setText("User ID: " + userId);
-      userIdRow.setTextSize(FONT_UNIT, FONT_SIZE);
+      userIdRow.setTextSize(FONT_UNIT, LABEL_FONT_SIZE);
       layout.addView(userIdRow);
 
       // Add a row for each Snapshot
@@ -125,22 +128,20 @@ public class HistoryActivity extends ActionBarActivity {
          individualSnapshotLayout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                ViewGroup.LayoutParams.WRAP_CONTENT));
 
-         // Tag is a list of hidable child component
+         // Tag is a list of expandable/collapsible child component
          individualSnapshotLayout.setTag(new ArrayList<View>());
 
          // Add date/time as label This TextView will also serve as an expand button
          Date timestamp = snapshot.getTimestamp();
          TextView individualSnapshotLabel = new TextView(this);
          individualSnapshotLabel.setText(timestamp.toString());
-         individualSnapshotLabel.setTextSize(FONT_UNIT, FONT_SIZE);
+         individualSnapshotLabel.setTextSize(FONT_UNIT, LABEL_FONT_SIZE);
          individualSnapshotLayout.addView(individualSnapshotLabel);
 
          // Tag is true if following siblings are displayed
          individualSnapshotLabel.setTag(false);
 
-
-
-
+         //*****************************************************************************************
 
          // Create a LinearLayout for each category under Snapshot
          // Layout for sensor data
@@ -152,7 +153,7 @@ public class HistoryActivity extends ActionBarActivity {
                individualSnapshotLayout.getPaddingTop(), individualSnapshotLayout.getPaddingRight(),
                individualSnapshotLayout.getPaddingBottom());
 
-         // Tag is a list of hidable child component
+         // Tag is a list of expandable/collapsible child component
          sensorLayout.setTag(new ArrayList<View>());
 
          // Add this layout to the parent's tag
@@ -161,7 +162,7 @@ public class HistoryActivity extends ActionBarActivity {
          // Label for the sensor data
          TextView sensorLabel = new TextView(this);
          sensorLabel.setText(R.string.history_screen_sensor_label);
-         sensorLabel.setTextSize(FONT_UNIT, FONT_SIZE);
+         sensorLabel.setTextSize(FONT_UNIT, LABEL_FONT_SIZE);
          sensorLayout.addView(sensorLabel);
 
          // Tag is true if following siblings are displayed
@@ -183,7 +184,7 @@ public class HistoryActivity extends ActionBarActivity {
             TableRow tr = new TableRow(this);
             TextView tv = new TextView(this);
             tv.setText(R.string.history_screen_no_data);
-            tv.setTextSize(FONT_UNIT, FONT_SIZE);
+            tv.setTextSize(FONT_UNIT, LABEL_FONT_SIZE);
             tr.addView(tv);
             sensorTable.addView(tr);
          }
@@ -193,9 +194,7 @@ public class HistoryActivity extends ActionBarActivity {
             }
          }
 
-
-
-
+         //*****************************************************************************************
 
          // Layout for EMA
          LinearLayout emaLayout = new LinearLayout(this);
@@ -206,7 +205,7 @@ public class HistoryActivity extends ActionBarActivity {
                individualSnapshotLayout.getPaddingTop(), individualSnapshotLayout.getPaddingRight(),
                individualSnapshotLayout.getPaddingBottom());
 
-         // Tag is a list of hidable child component
+         // Tag is a list of expandable/collapsible child component
          emaLayout.setTag(new ArrayList<View>());
 
          // Add this layout to the parent's tag
@@ -215,7 +214,7 @@ public class HistoryActivity extends ActionBarActivity {
          // Label for the EMA
          TextView emaLabel = new TextView(this);
          emaLabel.setText(R.string.history_screen_ema_label);
-         emaLabel.setTextSize(FONT_UNIT, FONT_SIZE);
+         emaLabel.setTextSize(FONT_UNIT, LABEL_FONT_SIZE);
          emaLayout.addView(emaLabel);
 
          // Tag is a Boolean which is true when the layout is expanded
@@ -258,14 +257,7 @@ public class HistoryActivity extends ActionBarActivity {
          emaTable.addView(makeTableRow(getResources().getString(R.string.history_screen_ema_barrier_label),
                String.valueOf(ema.getBarrier())));
 
-
-
-
-
-
-
-
-
+         //*****************************************************************************************
 
          // Layout for existing conditions
          LinearLayout conditionLayout = new LinearLayout(this);
@@ -276,7 +268,7 @@ public class HistoryActivity extends ActionBarActivity {
                individualSnapshotLayout.getPaddingTop(), individualSnapshotLayout.getPaddingRight(),
                individualSnapshotLayout.getPaddingBottom());
 
-         // Tag is a list of hidable child component
+         // Tag is a list of expandable/collapsible child component
          conditionLayout.setTag(new ArrayList<View>());
 
          // Add this layout to the parent's tag
@@ -285,7 +277,7 @@ public class HistoryActivity extends ActionBarActivity {
          // Label for the existing conditions
          TextView conditionLabel = new TextView(this);
          conditionLabel.setText(R.string.history_screen_condition_label);
-         conditionLabel.setTextSize(FONT_UNIT, FONT_SIZE);
+         conditionLabel.setTextSize(FONT_UNIT, LABEL_FONT_SIZE);
          conditionLayout.addView(conditionLabel);
 
          // Tag is a Boolean which is true when the layout is expanded
@@ -309,14 +301,14 @@ public class HistoryActivity extends ActionBarActivity {
             // If no conditions, display message
             TextView condView = new TextView(this);
             condView.setText(R.string.history_screen_no_conds);
-            condView.setTextSize(FONT_UNIT, FONT_SIZE);
+            condView.setTextSize(FONT_UNIT, LABEL_FONT_SIZE);
             conditionTable.addView(condView);
          }
          else {
             for (String cond: conditions) {
                TextView condView = new TextView(this);
                condView.setText(cond);
-               condView.setTextSize(FONT_UNIT, FONT_SIZE);
+               condView.setTextSize(FONT_UNIT, TABLE_FONT_SIZE);
                conditionTable.addView(condView);
             }
          }
@@ -346,11 +338,11 @@ public class HistoryActivity extends ActionBarActivity {
       TableRow tr = new TableRow(this);
       TextView c1 = new TextView(this), c2 = new TextView(this);
       c1.setText(col1);
-      c1.setTextSize(FONT_UNIT, FONT_SIZE);
-      c1.setPadding(2, 2, 2, 5);
+      c1.setTextSize(FONT_UNIT, TABLE_FONT_SIZE);
+      c1.setPadding(2, 2, 2, 15);
       c2.setText(col2);
-      c2.setTextSize(FONT_UNIT, FONT_SIZE);
-      c2.setPadding(5, 2, 2, 2);
+      c2.setTextSize(FONT_UNIT, TABLE_FONT_SIZE);
+      c2.setPadding(15, 2, 2, 2);
       c2.setGravity(Gravity.END);
       tr.addView(c1);
       tr.addView(c2);
@@ -367,8 +359,8 @@ public class HistoryActivity extends ActionBarActivity {
        * @param v The View that was clicked
        */
       public void onClick(View v) {
-         Boolean tag = (Boolean)(v.getTag());
-         LinearLayout parent = (LinearLayout)(v.getParent());
+         Boolean tag = (Boolean)v.getTag();
+         LinearLayout parent = (LinearLayout)v.getParent();
          ArrayList<View> kids = (ArrayList<View>)parent.getTag();
          if(tag) {
             // Snapshot is expanded; must be collapsed

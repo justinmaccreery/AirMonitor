@@ -23,7 +23,7 @@ public class MainActivity extends ActionBarActivity {
 
    final private static int FONT_UNIT = android.util.TypedValue.COMPLEX_UNIT_SP;
 
-   final private static float FONT_SIZE = 20;
+   final private static float FONT_SIZE = 16;
 
    @Override
    protected void onCreate(Bundle savedInstanceState) {

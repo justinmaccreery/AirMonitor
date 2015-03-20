@@ -13,7 +13,6 @@ import jimjams.airmonitor.sensordata.SensorData;
 /**
  * Captures instantaneous environmental data and associates it with a personal
  * Ecological Momentary Assessment (EMA).
- * @author Sean
  */
 public class Snapshot {
 
