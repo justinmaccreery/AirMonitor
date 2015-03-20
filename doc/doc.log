@@ -1,127 +1,195 @@
 Loading source files for package jimjams.airmonitor...
-[parsing started RegularFileObject[.\jimjams\airmonitor\EMAScreenActivity.java]]
-[parsing completed 47ms]
+[parsing started RegularFileObject[.\jimjams\airmonitor\EMAActivity.java]]
+[parsing completed 77ms]
+[parsing started RegularFileObject[.\jimjams\airmonitor\HistoryActivity.java]]
+[parsing completed 21ms]
 [parsing started RegularFileObject[.\jimjams\airmonitor\MainActivity.java]]
-[parsing completed 0ms]
+[parsing completed 8ms]
 Loading source files for package jimjams.airmonitor.database...
 [parsing started RegularFileObject[.\jimjams\airmonitor\database\AMDBContract.java]]
-[parsing completed 16ms]
+[parsing completed 23ms]
 [parsing started RegularFileObject[.\jimjams\airmonitor\database\AMDBHelper.java]]
-[parsing completed 0ms]
+[parsing completed 1ms]
 [parsing started RegularFileObject[.\jimjams\airmonitor\database\DBAccess.java]]
-[parsing completed 0ms]
+[parsing completed 17ms]
 Loading source files for package jimjams.airmonitor.datastructure...
 [parsing started RegularFileObject[.\jimjams\airmonitor\datastructure\EcologicalMomentaryAssessment.java]]
-[parsing completed 15ms]
-[parsing started RegularFileObject[.\jimjams\airmonitor\datastructure\ExistingCondition.java]]
-[parsing completed 0ms]
+[parsing completed 7ms]
 [parsing started RegularFileObject[.\jimjams\airmonitor\datastructure\Profile.java]]
-[parsing completed 16ms]
+[parsing completed 4ms]
 [parsing started RegularFileObject[.\jimjams\airmonitor\datastructure\Snapshot.java]]
-[parsing completed 0ms]
+[parsing completed 8ms]
 Loading source files for package jimjams.airmonitor.sensordata...
 [parsing started RegularFileObject[.\jimjams\airmonitor\sensordata\SensorData.java]]
-[parsing completed 0ms]
+[parsing completed 3ms]
 [parsing started RegularFileObject[.\jimjams\airmonitor\sensordata\SensorDataGenerator.java]]
-[parsing completed 16ms]
+[parsing completed 3ms]
 Constructing Javadoc information...
-.\jimjams\airmonitor\EMAScreenActivity.java:3: error: package android.content does not exist
+.\jimjams\airmonitor\EMAActivity.java:3: error: package android.content does not exist
 import android.content.Context;
                       ^
-.\jimjams\airmonitor\EMAScreenActivity.java:4: error: package android.content does not exist
+.\jimjams\airmonitor\EMAActivity.java:4: error: package android.content does not exist
 import android.content.Intent;
                       ^
-.\jimjams\airmonitor\EMAScreenActivity.java:5: error: package android.os does not exist
+.\jimjams\airmonitor\EMAActivity.java:5: error: package android.os does not exist
 import android.os.Bundle;
                  ^
-.\jimjams\airmonitor\EMAScreenActivity.java:6: error: package android.support.v7.app does not exist
+.\jimjams\airmonitor\EMAActivity.java:6: error: package android.support.v7.app does not exist
 import android.support.v7.app.ActionBarActivity;
                              ^
-.\jimjams\airmonitor\EMAScreenActivity.java:7: error: package android.util does not exist
+.\jimjams\airmonitor\EMAActivity.java:7: error: package android.util does not exist
 import android.util.Log;
                    ^
-.\jimjams\airmonitor\EMAScreenActivity.java:8: error: package android.view does not exist
+.\jimjams\airmonitor\EMAActivity.java:8: error: package android.view does not exist
 import android.view.Menu;
                    ^
-.\jimjams\airmonitor\EMAScreenActivity.java:9: error: package android.view does not exist
+.\jimjams\airmonitor\EMAActivity.java:9: error: package android.view does not exist
 import android.view.MenuItem;
                    ^
-.\jimjams\airmonitor\EMAScreenActivity.java:10: error: package android.view does not exist
+.\jimjams\airmonitor\EMAActivity.java:10: error: package android.view does not exist
 import android.view.View;
                    ^
-.\jimjams\airmonitor\EMAScreenActivity.java:11: error: package android.widget does not exist
+.\jimjams\airmonitor\EMAActivity.java:11: error: package android.widget does not exist
 import android.widget.Button;
                      ^
-.\jimjams\airmonitor\EMAScreenActivity.java:12: error: package android.widget does not exist
+.\jimjams\airmonitor\EMAActivity.java:12: error: package android.widget does not exist
 import android.widget.EditText;
                      ^
-.\jimjams\airmonitor\EMAScreenActivity.java:13: error: package android.widget does not exist
+.\jimjams\airmonitor\EMAActivity.java:13: error: package android.widget does not exist
 import android.widget.RadioGroup;
                      ^
-.\jimjams\airmonitor\EMAScreenActivity.java:14: error: package android.widget does not exist
+.\jimjams\airmonitor\EMAActivity.java:14: error: package android.widget does not exist
 import android.widget.SeekBar;
                      ^
-.\jimjams\airmonitor\EMAScreenActivity.java:15: error: package android.widget does not exist
+.\jimjams\airmonitor\EMAActivity.java:15: error: package android.widget does not exist
 import android.widget.TableLayout;
                      ^
-.\jimjams\airmonitor\EMAScreenActivity.java:16: error: package android.widget does not exist
+.\jimjams\airmonitor\EMAActivity.java:16: error: package android.widget does not exist
 import android.widget.TableRow;
                      ^
-.\jimjams\airmonitor\EMAScreenActivity.java:17: error: package android.widget does not exist
+.\jimjams\airmonitor\EMAActivity.java:17: error: package android.widget does not exist
 import android.widget.TextView;
                      ^
-.\jimjams\airmonitor\EMAScreenActivity.java:31: error: cannot find symbol
-public class EMAScreenActivity extends ActionBarActivity {
-                                       ^
+.\jimjams\airmonitor\EMAActivity.java:32: error: cannot find symbol
+      EMAActivity extends ActionBarActivity {
+                          ^
   symbol: class ActionBarActivity
-.\jimjams\airmonitor\EMAScreenActivity.java:39: error: cannot find symbol
+.\jimjams\airmonitor\EMAActivity.java:40: error: cannot find symbol
    protected void onCreate(Bundle savedInstanceState) {
                            ^
   symbol:   class Bundle
-  location: class EMAScreenActivity
-.\jimjams\airmonitor\EMAScreenActivity.java:45: error: cannot find symbol
+  location: class EMAActivity
+.\jimjams\airmonitor\EMAActivity.java:46: error: cannot find symbol
    public boolean onCreateOptionsMenu(Menu menu) {
                                       ^
   symbol:   class Menu
-  location: class EMAScreenActivity
-.\jimjams\airmonitor\EMAScreenActivity.java:52: error: cannot find symbol
+  location: class EMAActivity
+.\jimjams\airmonitor\EMAActivity.java:53: error: cannot find symbol
    public boolean onOptionsItemSelected(MenuItem item) {
                                         ^
   symbol:   class MenuItem
-  location: class EMAScreenActivity
-.\jimjams\airmonitor\EMAScreenActivity.java:71: error: cannot find symbol
+  location: class EMAActivity
+.\jimjams\airmonitor\EMAActivity.java:81: error: cannot find symbol
    public void on_EMA_Screen_save_button_click(View saveBtn) {
                                                ^
   symbol:   class View
-  location: class EMAScreenActivity
-.\jimjams\airmonitor\EMAScreenActivity.java:141: error: cannot find symbol
+  location: class EMAActivity
+.\jimjams\airmonitor\EMAActivity.java:164: error: cannot find symbol
    public void on_EMA_Screen_cancel_button_click(View cancelBtn) {
                                                  ^
   symbol:   class View
-  location: class EMAScreenActivity
-.\jimjams\airmonitor\EMAScreenActivity.java:150: error: cannot find symbol
+  location: class EMAActivity
+.\jimjams\airmonitor\EMAActivity.java:173: error: cannot find symbol
    public void on_EMA_Screen_add_button_click(View addBtn) {
                                               ^
   symbol:   class View
-  location: class EMAScreenActivity
-.\jimjams\airmonitor\EMAScreenActivity.java:195: error: package View does not exist
+  location: class EMAActivity
+.\jimjams\airmonitor\EMAActivity.java:220: error: package View does not exist
    private class DeleteButtonListener implements View.OnClickListener {
                                                      ^
-.\jimjams\airmonitor\EMAScreenActivity.java:201: error: cannot find symbol
+.\jimjams\airmonitor\EMAActivity.java:225: error: cannot find symbol
       public void onClick(View v) {
                           ^
   symbol:   class View
-  location: class EMAScreenActivity.DeleteButtonListener
-.\jimjams\airmonitor\EMAScreenActivity.java:211: error: cannot find symbol
+  location: class EMAActivity.DeleteButtonListener
+.\jimjams\airmonitor\EMAActivity.java:235: error: cannot find symbol
    private class DeleteButton extends Button {
                                       ^
   symbol:   class Button
-  location: class EMAScreenActivity
-.\jimjams\airmonitor\EMAScreenActivity.java:223: error: cannot find symbol
-      DeleteButton(Context context, ExistingCondition condition) {
+  location: class EMAActivity
+.\jimjams\airmonitor\EMAActivity.java:245: error: cannot find symbol
+      DeleteButton(Context context, String condition) {
                    ^
   symbol:   class Context
-  location: class EMAScreenActivity.DeleteButton
+  location: class EMAActivity.DeleteButton
+.\jimjams\airmonitor\HistoryActivity.java:3: error: package android.os does not exist
+import android.os.Bundle;
+                 ^
+.\jimjams\airmonitor\HistoryActivity.java:4: error: package android.support.v7.app does not exist
+import android.support.v7.app.ActionBarActivity;
+                             ^
+.\jimjams\airmonitor\HistoryActivity.java:5: error: package android.util does not exist
+import android.util.Log;
+                   ^
+.\jimjams\airmonitor\HistoryActivity.java:6: error: package android.view does not exist
+import android.view.Gravity;
+                   ^
+.\jimjams\airmonitor\HistoryActivity.java:7: error: package android.view does not exist
+import android.view.Menu;
+                   ^
+.\jimjams\airmonitor\HistoryActivity.java:8: error: package android.view does not exist
+import android.view.MenuItem;
+                   ^
+.\jimjams\airmonitor\HistoryActivity.java:9: error: package android.view does not exist
+import android.view.View;
+                   ^
+.\jimjams\airmonitor\HistoryActivity.java:10: error: package android.view does not exist
+import android.view.ViewGroup;
+                   ^
+.\jimjams\airmonitor\HistoryActivity.java:11: error: package android.widget does not exist
+import android.widget.LinearLayout;
+                     ^
+.\jimjams\airmonitor\HistoryActivity.java:12: error: package android.widget does not exist
+import android.widget.TableLayout;
+                     ^
+.\jimjams\airmonitor\HistoryActivity.java:13: error: package android.widget does not exist
+import android.widget.TableRow;
+                     ^
+.\jimjams\airmonitor\HistoryActivity.java:14: error: package android.widget does not exist
+import android.widget.TextView;
+                     ^
+.\jimjams\airmonitor\HistoryActivity.java:26: error: cannot find symbol
+public class HistoryActivity extends ActionBarActivity {
+                                     ^
+  symbol: class ActionBarActivity
+.\jimjams\airmonitor\HistoryActivity.java:43: error: cannot find symbol
+   protected void onCreate(Bundle savedInstanceState) {
+                           ^
+  symbol:   class Bundle
+  location: class HistoryActivity
+.\jimjams\airmonitor\HistoryActivity.java:49: error: cannot find symbol
+   public boolean onCreateOptionsMenu(Menu menu) {
+                                      ^
+  symbol:   class Menu
+  location: class HistoryActivity
+.\jimjams\airmonitor\HistoryActivity.java:56: error: cannot find symbol
+   public boolean onOptionsItemSelected(MenuItem item) {
+                                        ^
+  symbol:   class MenuItem
+  location: class HistoryActivity
+.\jimjams\airmonitor\HistoryActivity.java:345: error: cannot find symbol
+   private TableRow makeTableRow(String col1, String col2) {
+           ^
+  symbol:   class TableRow
+  location: class HistoryActivity
+.\jimjams\airmonitor\HistoryActivity.java:363: error: package View does not exist
+   private class ExpansionListener implements View.OnClickListener {
+                                                  ^
+.\jimjams\airmonitor\HistoryActivity.java:369: error: cannot find symbol
+      public void onClick(View v) {
+                          ^
+  symbol:   class View
+  location: class HistoryActivity.ExpansionListener
 .\jimjams\airmonitor\MainActivity.java:3: error: package android.content does not exist
 import android.content.Intent;
                       ^
@@ -162,29 +230,34 @@ import android.widget.TextView;
 public class MainActivity extends ActionBarActivity {
                                   ^
   symbol: class ActionBarActivity
-.\jimjams\airmonitor\MainActivity.java:25: error: cannot find symbol
+.\jimjams\airmonitor\MainActivity.java:29: error: cannot find symbol
    protected void onCreate(Bundle savedInstanceState) {
                            ^
   symbol:   class Bundle
   location: class MainActivity
-.\jimjams\airmonitor\MainActivity.java:32: error: cannot find symbol
+.\jimjams\airmonitor\MainActivity.java:36: error: cannot find symbol
    public boolean onCreateOptionsMenu(Menu menu) {
                                       ^
   symbol:   class Menu
   location: class MainActivity
-.\jimjams\airmonitor\MainActivity.java:39: error: cannot find symbol
+.\jimjams\airmonitor\MainActivity.java:43: error: cannot find symbol
    public boolean onOptionsItemSelected(MenuItem item) {
                                         ^
   symbol:   class MenuItem
   location: class MainActivity
-.\jimjams\airmonitor\MainActivity.java:99: error: cannot find symbol
+.\jimjams\airmonitor\MainActivity.java:106: error: cannot find symbol
    public void on_MainScreen_EMA_button_Click(View emaBtn) {
                                               ^
   symbol:   class View
   location: class MainActivity
-.\jimjams\airmonitor\MainActivity.java:108: error: cannot find symbol
+.\jimjams\airmonitor\MainActivity.java:115: error: cannot find symbol
    public void on_MainScreen_refresh_button_Click(View rfrshBtn) {
                                                   ^
+  symbol:   class View
+  location: class MainActivity
+.\jimjams\airmonitor\MainActivity.java:123: error: cannot find symbol
+   public void on_MainScreen_hist_button_Click(View histBtn) {
+                                               ^
   symbol:   class View
   location: class MainActivity
 .\jimjams\airmonitor\database\AMDBContract.java:3: error: package android.provider does not exist
@@ -243,15 +316,26 @@ public class AMDBHelper extends SQLiteOpenHelper implements AMDBContract {
                       ^
   symbol:   class SQLiteDatabase
   location: class AMDBHelper
-.\jimjams\airmonitor\database\DBAccess.java:3: error: package android.database.sqlite does not exist
+.\jimjams\airmonitor\database\DBAccess.java:3: error: package android.content does not exist
+import android.content.ContentValues;
+                      ^
+.\jimjams\airmonitor\database\DBAccess.java:4: error: package android.database does not exist
+import android.database.Cursor;
+                       ^
+.\jimjams\airmonitor\database\DBAccess.java:5: error: package android.database.sqlite does not exist
 import android.database.sqlite.SQLiteDatabase;
                               ^
-.\jimjams\airmonitor\database\DBAccess.java:4: error: package android.util does not exist
-import android.util.Log;
-                   ^
-.\jimjams\airmonitor\datastructure\Profile.java:3: error: package android.util does not exist
-import android.util.Log;
-                   ^
+.\jimjams\airmonitor\database\DBAccess.java:6: error: package android.database.sqlite does not exist
+import android.database.sqlite.SQLiteFullException;
+                              ^
+.\jimjams\airmonitor\database\DBAccess.java:7: error: package android.location does not exist
+import android.location.Location;
+                       ^
+.\jimjams\airmonitor\database\DBAccess.java:32: error: cannot find symbol
+   private SQLiteDatabase database;
+           ^
+  symbol:   class SQLiteDatabase
+  location: class DBAccess
 .\jimjams\airmonitor\datastructure\Snapshot.java:3: error: package android.content does not exist
 import android.content.Context;
                       ^
@@ -261,34 +345,56 @@ import android.location.Location;
 .\jimjams\airmonitor\datastructure\Snapshot.java:5: error: package android.location does not exist
 import android.location.LocationManager;
                        ^
-.\jimjams\airmonitor\datastructure\Snapshot.java:6: error: package android.util does not exist
-import android.util.Log;
-                   ^
-.\jimjams\airmonitor\datastructure\Snapshot.java:31: error: cannot find symbol
+.\jimjams\airmonitor\database\DBAccess.java:286: error: cannot find symbol
+   public long getProfileId() throws SQLiteFullException {
+                                     ^
+  symbol:   class SQLiteFullException
+  location: class DBAccess
+.\jimjams\airmonitor\database\DBAccess.java:311: error: cannot find symbol
+   public ArrayList<String> getProfileConditions() throws SQLiteFullException {
+                                                          ^
+  symbol:   class SQLiteFullException
+  location: class DBAccess
+.\jimjams\airmonitor\datastructure\Snapshot.java:35: error: cannot find symbol
    private Location location;
            ^
   symbol:   class Location
   location: class Snapshot
-.\jimjams\airmonitor\datastructure\Snapshot.java:57: error: cannot find symbol
+.\jimjams\airmonitor\datastructure\Snapshot.java:61: error: cannot find symbol
                    EcologicalMomentaryAssessment ema, Context context) {
                                                       ^
   symbol:   class Context
   location: class Snapshot
-.\jimjams\airmonitor\datastructure\Snapshot.java:107: error: cannot find symbol
+.\jimjams\airmonitor\datastructure\Snapshot.java:86: error: cannot find symbol
+    public Snapshot(long userId, Date timestamp, Location location, ArrayList<SensorData> data, ArrayList<String> conditions, EcologicalMomentaryAssessment ema) {
+                                                 ^
+  symbol:   class Location
+  location: class Snapshot
+.\jimjams\airmonitor\datastructure\Snapshot.java:133: error: cannot find symbol
    public Location getLocation() {
           ^
   symbol:   class Location
   location: class Snapshot
+.\jimjams\airmonitor\datastructure\Profile.java:3: error: package android.database.sqlite does not exist
+import android.database.sqlite.SQLiteFullException;
+                              ^
+.\jimjams\airmonitor\datastructure\Profile.java:4: error: package android.util does not exist
+import android.util.Log;
+                   ^
 [search path for source files: .,C:\jing\jing-20081028\bin]
 [search path for class files: C:\Program Files\Java\jdk1.8.0_05\jre\lib\resources.jar,C:\Program Files\Java\jdk1.8.0_05\jre\lib\rt.jar,C:\Program Files\Java\jdk1.8.0_05\jre\lib\sunrsasign.jar,C:\Program Files\Java\jdk1.8.0_05\jre\lib\jsse.jar,C:\Program Files\Java\jdk1.8.0_05\jre\lib\jce.jar,C:\Program Files\Java\jdk1.8.0_05\jre\lib\charsets.jar,C:\Program Files\Java\jdk1.8.0_05\jre\lib\jfr.jar,C:\Program Files\Java\jdk1.8.0_05\jre\classes,C:\Program Files\Java\jdk1.8.0_05\jre\lib\ext\access-bridge-64.jar,C:\Program Files\Java\jdk1.8.0_05\jre\lib\ext\cldrdata.jar,C:\Program Files\Java\jdk1.8.0_05\jre\lib\ext\dnsns.jar,C:\Program Files\Java\jdk1.8.0_05\jre\lib\ext\jaccess.jar,C:\Program Files\Java\jdk1.8.0_05\jre\lib\ext\jfxrt.jar,C:\Program Files\Java\jdk1.8.0_05\jre\lib\ext\localedata.jar,C:\Program Files\Java\jdk1.8.0_05\jre\lib\ext\nashorn.jar,C:\Program Files\Java\jdk1.8.0_05\jre\lib\ext\sunec.jar,C:\Program Files\Java\jdk1.8.0_05\jre\lib\ext\sunjce_provider.jar,C:\Program Files\Java\jdk1.8.0_05\jre\lib\ext\sunmscapi.jar,C:\Program Files\Java\jdk1.8.0_05\jre\lib\ext\sunpkcs11.jar,C:\Program Files\Java\jdk1.8.0_05\jre\lib\ext\zipfs.jar,.,C:\jing\jing-20081028\bin]
 [loading ZipFileIndexFileObject[C:\Program Files\Java\jdk1.8.0_05\jre\lib\rt.jar(java/util/ArrayList.class)]]
 [loading ZipFileIndexFileObject[C:\Program Files\Java\jdk1.8.0_05\jre\lib\rt.jar(java/util/Arrays.class)]]
 [loading ZipFileIndexFileObject[C:\Program Files\Java\jdk1.8.0_05\jre\lib\rt.jar(java/lang/String.class)]]
 [loading ZipFileIndexFileObject[C:\Program Files\Java\jdk1.8.0_05\jre\lib\rt.jar(java/lang/Object.class)]]
-[loading ZipFileIndexFileObject[C:\Program Files\Java\jdk1.8.0_05\jre\lib\rt.jar(java/io/File.class)]]
 [loading ZipFileIndexFileObject[C:\Program Files\Java\jdk1.8.0_05\jre\lib\rt.jar(java/util/Date.class)]]
-[loading ZipFileIndexFileObject[C:\Program Files\Java\jdk1.8.0_05\jre\lib\rt.jar(java/util/List.class)]]
+[loading ZipFileIndexFileObject[C:\Program Files\Java\jdk1.8.0_05\jre\lib\rt.jar(java/io/File.class)]]
 [loading ZipFileIndexFileObject[C:\Program Files\Java\jdk1.8.0_05\jre\lib\rt.jar(java/text/DecimalFormat.class)]]
+[loading ZipFileIndexFileObject[C:\Program Files\Java\jdk1.8.0_05\jre\lib\rt.jar(java/lang/Long.class)]]
+[loading ZipFileIndexFileObject[C:\Program Files\Java\jdk1.8.0_05\jre\lib\rt.jar(java/util/List.class)]]
+[loading ZipFileIndexFileObject[C:\Program Files\Java\jdk1.8.0_05\jre\lib\rt.jar(java/lang/Enum.class)]]
+[loading ZipFileIndexFileObject[C:\Program Files\Java\jdk1.8.0_05\jre\lib\rt.jar(java/lang/Comparable.class)]]
+[loading ZipFileIndexFileObject[C:\Program Files\Java\jdk1.8.0_05\jre\lib\rt.jar(java/io/Serializable.class)]]
 [loading ZipFileIndexFileObject[C:\Program Files\Java\jdk1.8.0_05\jre\lib\rt.jar(java/lang/Override.class)]]
 [loading ZipFileIndexFileObject[C:\Program Files\Java\jdk1.8.0_05\jre\lib\rt.jar(java/lang/annotation/Annotation.class)]]
 [loading ZipFileIndexFileObject[C:\Program Files\Java\jdk1.8.0_05\jre\lib\rt.jar(java/lang/annotation/Target.class)]]
@@ -301,14 +407,21 @@ import android.util.Log;
 [loading ZipFileIndexFileObject[C:\Program Files\Java\jdk1.8.0_05\jre\lib\rt.jar(java/lang/Void.class)]]
 Standard Doclet version 1.8.0_05
 Building tree for all the packages and classes...
-Generating C:\android\projects\AirMonitor\doc\jimjams\airmonitor\EMAScreenActivity.html...
-.\jimjams\airmonitor\EMAScreenActivity.java:189: warning: no @param for str
+Generating C:\android\projects\AirMonitor\doc\jimjams\airmonitor\EMAActivity.html...
+.\jimjams\airmonitor\EMAActivity.java:213: warning: no @param for str
    private static String normalize(String str) {
                          ^
-Generating C:\android\projects\AirMonitor\doc\jimjams\airmonitor\EMAScreenActivity.DeleteButton.html...
-Generating C:\android\projects\AirMonitor\doc\jimjams\airmonitor\EMAScreenActivity.DeleteButtonListener.html...
-[loading ZipFileIndexFileObject[C:\Program Files\Java\jdk1.8.0_05\jre\lib\rt.jar(java/io/Serializable.class)]]
+Generating C:\android\projects\AirMonitor\doc\jimjams\airmonitor\EMAActivity.DeleteButton.html...
+Generating C:\android\projects\AirMonitor\doc\jimjams\airmonitor\EMAActivity.DeleteButtonListener.html...
+Generating C:\android\projects\AirMonitor\doc\jimjams\airmonitor\HistoryActivity.html...
+.\jimjams\airmonitor\EMAActivity.java:28: error: package android.util does not exist
+import jimjams.airmonitor.sensordata.SensorDataGenerator;
+               ^
+Generating C:\android\projects\AirMonitor\doc\jimjams\airmonitor\HistoryActivity.ExpansionListener.html...
 Generating C:\android\projects\AirMonitor\doc\jimjams\airmonitor\MainActivity.html...
+.\jimjams\airmonitor\EMAActivity.java:24: error: package android.util does not exist
+import jimjams.airmonitor.datastructure.EcologicalMomentaryAssessment;
+            ^
 Generating C:\android\projects\AirMonitor\doc\jimjams\airmonitor\database\AMDBContract.html...
 Generating C:\android\projects\AirMonitor\doc\jimjams\airmonitor\database\AMDBContract.EMATable.html...
 Generating C:\android\projects\AirMonitor\doc\jimjams\airmonitor\database\AMDBContract.ProfileTable.html...
@@ -316,13 +429,40 @@ Generating C:\android\projects\AirMonitor\doc\jimjams\airmonitor\database\AMDBCo
 Generating C:\android\projects\AirMonitor\doc\jimjams\airmonitor\database\AMDBContract.SnapshotTable.html...
 Generating C:\android\projects\AirMonitor\doc\jimjams\airmonitor\database\AMDBHelper.html...
 Generating C:\android\projects\AirMonitor\doc\jimjams\airmonitor\database\DBAccess.html...
+.\jimjams\airmonitor\database\DBAccess.java:179: warning: no @return
+   public long saveEMA(EcologicalMomentaryAssessment ema) {
+               ^
+.\jimjams\airmonitor\database\DBAccess.java:284: error: reference not found
+    * @throws SQLiteFullException if the database contains more than one Profile
+      ^
+.\jimjams\airmonitor\database\DBAccess.java:309: error: reference not found
+    * @throws SQLiteFullException
+      ^
+.\jimjams\airmonitor\database\DBAccess.java:309: warning: no description for @throws
+    * @throws SQLiteFullException
+      ^
+.\jimjams\airmonitor\database\DBAccess.java:480: warning: no @param for type
+   private ArrayList unflatten(String str, DBDataType type) {
+                     ^
+Generating C:\android\projects\AirMonitor\doc\jimjams\airmonitor\database\DBAccess.DBDataType.html...
+[loading ZipFileIndexFileObject[C:\Program Files\Java\jdk1.8.0_05\jre\lib\rt.jar(java/lang/Class.class)]]
+[loading ZipFileIndexFileObject[C:\Program Files\Java\jdk1.8.0_05\jre\lib\rt.jar(java/lang/CloneNotSupportedException.class)]]
+[loading ZipFileIndexFileObject[C:\Program Files\Java\jdk1.8.0_05\jre\lib\rt.jar(java/lang/IllegalArgumentException.class)]]
+[loading ZipFileIndexFileObject[C:\Program Files\Java\jdk1.8.0_05\jre\lib\rt.jar(java/lang/NullPointerException.class)]]
 Generating C:\android\projects\AirMonitor\doc\jimjams\airmonitor\datastructure\EcologicalMomentaryAssessment.html...
-Generating C:\android\projects\AirMonitor\doc\jimjams\airmonitor\datastructure\ExistingCondition.html...
 Generating C:\android\projects\AirMonitor\doc\jimjams\airmonitor\datastructure\Profile.html...
 Generating C:\android\projects\AirMonitor\doc\jimjams\airmonitor\datastructure\Snapshot.html...
+.\jimjams\airmonitor\datastructure\Snapshot.java:86: warning: no @param for userId
+    public Snapshot(long userId, Date timestamp, Location location, ArrayList<SensorData> data, ArrayList<String> conditions, EcologicalMomentaryAssessment ema) {
+           ^
+.\jimjams\airmonitor\datastructure\Snapshot.java:86: warning: no @param for timestamp
+    public Snapshot(long userId, Date timestamp, Location location, ArrayList<SensorData> data, ArrayList<String> conditions, EcologicalMomentaryAssessment ema) {
+           ^
 Generating C:\android\projects\AirMonitor\doc\jimjams\airmonitor\sensordata\SensorData.html...
+.\jimjams\airmonitor\sensordata\SensorData.java:62: error: @param name not found
+    * @param decimalValue Display value of the data
+             ^
 Generating C:\android\projects\AirMonitor\doc\jimjams\airmonitor\sensordata\SensorDataGenerator.html...
-.\jimjams\airmonitor\sensordata\SensorDataGenerator.java:23: warning - Tag @link: missing '#': "getData()"
 Generating C:\android\projects\AirMonitor\doc\jimjams\airmonitor\sensordata\SensorDataGenerator.DataCategory.html...
 Generating C:\android\projects\AirMonitor\doc\overview-frame.html...
 Generating C:\android\projects\AirMonitor\doc\jimjams\airmonitor\package-frame.html...
@@ -348,5 +488,6 @@ Generating C:\android\projects\AirMonitor\doc\allclasses-noframe.html...
 Generating C:\android\projects\AirMonitor\doc\index.html...
 Generating C:\android\projects\AirMonitor\doc\overview-summary.html...
 Generating C:\android\projects\AirMonitor\doc\help-doc.html...
-[done in 2733 ms]
-69 warnings
+[done in 4522 ms]
+5 errors
+100 warnings
