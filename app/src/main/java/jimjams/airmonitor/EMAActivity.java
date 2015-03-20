@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 
 import jimjams.airmonitor.database.DBAccess;
 import jimjams.airmonitor.datastructure.EcologicalMomentaryAssessment;
@@ -26,13 +27,22 @@ import jimjams.airmonitor.sensordata.SensorData;
 import jimjams.airmonitor.sensordata.SensorDataGenerator;
 
 
-public class
-      EMAActivity extends ActionBarActivity {
+public class EMAActivity extends ActionBarActivity {
 
    /**
     * Used to identify source class for log
     */
    private String className = getClass().getSimpleName();
+
+   /**
+    * Allows database access
+    */
+   private DBAccess access = DBAccess.getDBAccess();
+
+   /**
+    * Current profile
+    */
+   private Profile profile = Profile.getProfile();
 
    @Override
    protected void onCreate(Bundle savedInstanceState) {
@@ -63,25 +73,118 @@ public class
    }
 
    /**
-    * Overrides default method to populate existing conditions list.
+    * Overrides default method to populate EMA and conditions fields
     */
+   @Override
    protected void onStart() {
       super.onStart();
-      // Log.d(className, DBAccess.getDBAccess().toString(AMDBContract.ProfileTable.TABLE_NAME));
+
+      // Populate EMA fields with data from last Snapshot
+      loadLastEmaData();
+
+      // Update the existing conditions list
       refreshExistingConditions();
    }
 
+   private void loadLastEmaData() {
+      // Get latest Snapshot
+      Snapshot latest = getLatestSnapshot();
+
+      if(latest != null) {
+         // Latest EMA
+         EcologicalMomentaryAssessment ema = latest.getEma();
+
+         // Update indoors radiogroup
+         RadioGroup inOrOutGroup = (RadioGroup)findViewById(R.id.ema_screen_in_or_out_group);
+         if(ema.getIndoors()) {
+            inOrOutGroup.check(R.id.ema_screen_in_radio);
+         }
+         else {
+            inOrOutGroup.check(R.id.ema_screen_out_radio);
+         }
+
+         // Update location field
+         EditText locationField = (EditText)findViewById(R.id.ema_screen_where_input);
+         locationField.setText(ema.getReportedLocation());
+
+         // Update activity field
+         EditText activityField = (EditText)findViewById(R.id.ema_screen_what_input);
+         activityField.setText(ema.getActivity());
+
+         // Update companions field
+         EditText companionsField = (EditText)findViewById(R.id.ema_screen_who_input);
+         ArrayList<String> companions = ema.getCompanions();
+         String companionsString = "";
+         for(int i = 0; i < companions.size(); i++) {
+            if(i > 0) {
+               companionsString += "\n";
+            }
+            companionsString += companions.get(i);
+         }
+         companionsField.setText(companionsString);
+
+         // Update air quality seekbar
+         SeekBar aqBar = (SeekBar)findViewById(R.id.ema_screen_aq_awareness_input);
+         aqBar.setProgress(scaleUp(ema.getAirQuality()));
+
+         // Update the belief seekbar
+         SeekBar beliefBar = (SeekBar)findViewById(R.id.ema_screen_aq_belief_input);
+         beliefBar.setProgress(scaleUp(ema.getBelief()));
+
+         // Update the intention seekbar
+         SeekBar intentionBar = (SeekBar)findViewById(R.id.ema_screen_aq_intent_input);
+         intentionBar.setProgress(scaleUp(ema.getIntention()));
+
+         // Update behavior radiogroup
+         RadioGroup behaviorGroup = (RadioGroup)findViewById(R.id.ema_screen_aq_behave_group);
+         if(ema.getBehavior()) {
+            behaviorGroup.check(R.id.ema_screen_aq_behave_yes_radio);
+         }
+         else {
+            behaviorGroup.check(R.id.ema_screen_aq_behave_no_radio);
+         }
+
+         // Update barrier field
+         EditText barrierField = (EditText)findViewById(R.id.ema_screen_aq_barrier_input);
+         barrierField.setText(ema.getBarrier());
+      }
+   }
+
    /**
-    * Invoked when the save button on the EMA screen is clicked. Generates a Snapshot based on
-    * current sensor data, the user's existing conditions, and the results of the EMA.
+    * Returns the latest Snapshot, or null if there are no Snapshots in the database.
+    * @return The latest Snapshot, or null
+    */
+   private Snapshot getLatestSnapshot() {
+      Snapshot latest = null;
+
+      // Get all Snapshots
+      ArrayList<Snapshot> snapshots = access.getSnapshots(profile.getId());
+
+      // Sort Snapshots
+      if(snapshots.size() > 0) {
+         Comparator<Snapshot> comparator = new Comparator<Snapshot>() {
+            public int compare(Snapshot snap1, Snapshot snap2) {
+               return snap1.getTimestamp().compareTo(snap2.getTimestamp());
+            }
+         };
+
+         // It seems that our target version of Android doesn't support Java 1.8, so this needs to
+         // be done manually
+         Snapshot[] array = new Snapshot[snapshots.size()];
+         array = snapshots.toArray(array);
+         Arrays.sort(array, comparator);
+         latest = array[array.length - 1];
+      }
+      return latest;
+   }
+
+   /**
+    * Invoked when the save button on the EMA screen is clicked. Generates and saves to database a
+    * Snapshot based on current sensor data, the user's existing conditions, and the results of the
+    * EMA. Returns to main screen.
     * @param saveBtn The save button
     */
    public void on_EMA_Screen_save_button_click(View saveBtn) {
-      // Allows database access
-      DBAccess access = DBAccess.getDBAccess();
-
-      // Current profile
-      Profile profile = Profile.getProfile();
 
       // Current set of sensor data
       ArrayList<SensorData> data = SensorDataGenerator.getInstance().getData();
@@ -108,7 +211,6 @@ public class
     * @return An EcologicalMomentaryAssessment
     */
    private EcologicalMomentaryAssessment getEma() {
-
       // Log.d(className, "Creating EMA.");
 
       // Get the indoors value
@@ -135,15 +237,15 @@ public class
 
       // Get air quality
       SeekBar aqBar = (SeekBar)findViewById(R.id.ema_screen_aq_awareness_input);
-      int aq = ((int)(aqBar.getProgress() *.99 + 10)) / 10;
+      int aq = scaleDown(aqBar.getProgress());
 
       // Get belief
       SeekBar beliefBar = (SeekBar)findViewById(R.id.ema_screen_aq_belief_input);
-      int belief = ((int)(beliefBar.getProgress() *.99 + 10)) / 10;
+      int belief = scaleDown(beliefBar.getProgress());
 
       // Get intention info
       SeekBar intentBar = (SeekBar)findViewById(R.id.ema_screen_aq_intent_input);
-      int intention = ((int)(intentBar.getProgress() *.99 + 10)) / 10;
+      int intention = scaleDown(intentBar.getProgress());
 
       // Get behavior info
       RadioGroup behaveRg = (RadioGroup)findViewById(R.id.ema_screen_aq_behave_group);
@@ -257,4 +359,26 @@ public class
          return condition;
       }
    }
+
+   /**
+    * Scales a SeekBar's value (0 - 100) to a value from 1 - 10.
+    * @param seekBarValue The value obtained from the seekBar's getProgress() method
+    * @return The Seekbar's value, scaled to a range of 1 - 10
+    */
+   private static int scaleDown(int seekBarValue) {
+      return ((int)(seekBarValue *.99 + 10)) / 10;
+   }
+
+   /**
+    * Scales a value inthe range 1 - 10 to a value from 0 - 100, to be used to update a SeekBar.
+    * @param scaledValue The scaled-down value
+    * @return Scaled-up value
+    */
+   private static int scaleUp(int scaledValue) {
+      scaledValue *= 10;
+      scaledValue -= 1;
+      scaledValue /= .99;
+      return (int)scaledValue;
+   }
+
 }

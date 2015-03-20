@@ -21,8 +21,14 @@ import jimjams.airmonitor.sensordata.SensorDataGenerator;
 
 public class MainActivity extends ActionBarActivity {
 
+   /**
+    * Font unit. This is a scaled pixel type; it will scale with the user's font preferences
+    */
    final private static int FONT_UNIT = android.util.TypedValue.COMPLEX_UNIT_SP;
 
+   /**
+    * Font size
+    */
    final private static float FONT_SIZE = 16;
 
    @Override
@@ -86,10 +92,10 @@ public class MainActivity extends ActionBarActivity {
             TableRow tr = new TableRow(this);
             TextView label = new TextView(this), value = new TextView(this);
             label.setText(sd.getDisplayName());
-            label.setPadding(2, 2, 2, 5);
+            label.setPadding(2, 2, 15, 2);
             label.setTextSize(FONT_UNIT, FONT_SIZE);
             value.setText(sd.getDisplayValue());
-            value.setPadding(5, 2, 2, 2);
+            value.setPadding(15, 2, 2, 2);
             value.setGravity(Gravity.END);
             value.setTextSize(FONT_UNIT, FONT_SIZE);
             tr.addView(label);

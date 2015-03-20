@@ -25,10 +25,19 @@ import jimjams.airmonitor.sensordata.SensorData;
 
 public class HistoryActivity extends ActionBarActivity {
 
+   /**
+    * Font unit. This is a scaled pixel type; it will scale with the user's font preferences
+    */
    final private static int FONT_UNIT = android.util.TypedValue.COMPLEX_UNIT_SP;
 
+   /**
+    * Font size for clickable labels
+    */
    final private static float LABEL_FONT_SIZE = 20;
 
+   /**
+    * Font size for data tables
+    */
    final private static float TABLE_FONT_SIZE = 14;
 
    /**
@@ -294,7 +303,7 @@ public class HistoryActivity extends ActionBarActivity {
          ((ArrayList<View>)conditionLayout.getTag()).add(conditionTable);
 
          // Get the existing conditions data
-         ArrayList<String> conditions = profile.getConditions();
+         ArrayList<String> conditions = snapshot.getConditions();
 
           // Populate the layout
          if(conditions.size()  == 0) {
@@ -339,7 +348,7 @@ public class HistoryActivity extends ActionBarActivity {
       TextView c1 = new TextView(this), c2 = new TextView(this);
       c1.setText(col1);
       c1.setTextSize(FONT_UNIT, TABLE_FONT_SIZE);
-      c1.setPadding(2, 2, 2, 15);
+      c1.setPadding(2, 2, 15, 2);
       c2.setText(col2);
       c2.setTextSize(FONT_UNIT, TABLE_FONT_SIZE);
       c2.setPadding(15, 2, 2, 2);
