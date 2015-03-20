@@ -40,4 +40,15 @@
            android:textSize="24sp"
            android:layout_gravity="center"/>
 
+
+   <!-- Button to view user history -->
+   <Button android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_alignParentBottom="true"
+           android:layout_centerHorizontal="true"
+           android:text="@string/mainScreen_hist_button"
+           android:onClick="on_MainScreen_hist_button_Click"
+           android:textSize="24sp"
+           android:layout_gravity="center"/>
+
 </RelativeLayout>

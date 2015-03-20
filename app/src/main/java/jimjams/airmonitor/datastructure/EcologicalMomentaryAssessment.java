@@ -174,7 +174,7 @@ public class EcologicalMomentaryAssessment {
          if(i != 0) {
             result += ", ";
          }
-         result += "\"" + companions.get(i) + "\"";
+         result += companions.get(i);
       }
       result += "; airQuality: " + airQuality + "; ";
       result += "belief: " + belief + "; ";

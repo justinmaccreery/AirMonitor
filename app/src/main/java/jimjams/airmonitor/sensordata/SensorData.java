@@ -39,19 +39,33 @@ public class SensorData {
    private String displayValue;
 
    /**
-    * Constructor.
+    * Constructor to be used by SensorDataGenerator.
     * @param displayName   Display name for the data
     * @param shortName     Short name for the data
     * @param value         Value of the reading
     * @param decimalPlaces Number of decimal places to be used in displayValue
     * @param unit          Unit of measure
     */
-   public SensorData(String displayName, String shortName, double value, int decimalPlaces,
+   SensorData(String displayName, String shortName, double value, int decimalPlaces,
                      String unit) {
       this.displayName = displayName;
       this.shortName = shortName;
       this.value = value;
       this.displayValue = df[decimalPlaces].format(value) + unit;
+   }
+
+   /**
+    * Constructor to be used by DBAccess.
+    * @param displayName  Display name for the data
+    * @param shortName    Short name for the data
+    * @param value        Value of the reading
+    * @param decimalValue Display value of the data
+    */
+   public SensorData(String displayName, String shortName, double value, String displayValue) {
+      this.displayName = displayName;
+      this.shortName = shortName;
+      this.value = value;
+      this.displayValue = displayValue;
    }
 
    /**

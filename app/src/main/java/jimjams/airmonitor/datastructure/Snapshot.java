@@ -42,7 +42,7 @@ public class Snapshot {
    /**
     * ArrayList of Existing conditions at the time of the Snapshot
     */
-   private ArrayList<ExistingCondition> conditions;
+   private ArrayList<String> conditions;
 
    /**
     * EMA at the time of the Snapshot
@@ -57,7 +57,7 @@ public class Snapshot {
     * @param context The context to be used to fetch the location. Generally, this is just the
     *                invoking Activity.
     */
-   public Snapshot(ArrayList<SensorData> data, ArrayList<ExistingCondition> conditions,
+   public Snapshot(ArrayList<SensorData> data, ArrayList<String> conditions,
                    EcologicalMomentaryAssessment ema, Context context) {
       this.userId = Profile.getProfile().getId();
       this.data = data;
@@ -81,6 +81,19 @@ public class Snapshot {
    }
 
    /**
+    * Constructor to be used by DBAccess to build Snapshot from database.
+    */
+    public Snapshot(long userId, Date timestamp, Location location, ArrayList<SensorData> data, ArrayList<String> conditions, EcologicalMomentaryAssessment ema) {
+      this.userId = userId;
+      this.timestamp = timestamp;
+      this.location = location;
+      this.data = data;
+      this.conditions = conditions;
+      this.ema = ema;
+   }
+
+
+   /**
     * Returns the user ID for this Snapshot.
     * @return The user ID for this Snapshot
     */
@@ -100,7 +113,7 @@ public class Snapshot {
     * Returns the existing conditions at the time of the Snapshot.
     * @return Existing conditions
     */
-   public ArrayList<ExistingCondition> getConditions() {
+   public ArrayList<String> getConditions() {
       return conditions;
    }
 
@@ -144,7 +157,7 @@ public class Snapshot {
          if(i != 0) {
             result += ", ";
          }
-         result += conditions.get(i).getName();
+         result += conditions.get(i);
       }
       result += "; ";
       result += ema;

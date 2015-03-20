@@ -4,13 +4,13 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteFullException;
-import android.util.Log;
+import android.location.Location;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Date;
 
 import jimjams.airmonitor.datastructure.EcologicalMomentaryAssessment;
-import jimjams.airmonitor.datastructure.ExistingCondition;
 import jimjams.airmonitor.datastructure.Profile;
 import jimjams.airmonitor.datastructure.Snapshot;
 import jimjams.airmonitor.sensordata.SensorData;
@@ -42,6 +42,11 @@ public class DBAccess implements AMDBContract {
    private static boolean deleteDatabase = false;
 
    /**
+    * Used to separate values in an array stored as a String
+    */
+   private static final String ARRAY_SEPARATOR = ";";
+
+   /**
     * Constructor. Creates the database if it does not already exist, and populates it with the
     * necessary tables if they do not exist.
     */
@@ -49,38 +54,35 @@ public class DBAccess implements AMDBContract {
 
       File path = new File(DB_PATH);
 
-      Log.d(className, "Path: " + path.getAbsolutePath());
+      // Log.d(className, "Path: " + path.getAbsolutePath());
 
-      Log.d(className, "Path exists: " + path.exists());
+      // Log.d(className, "Path exists: " + path.exists());
       if(!path.exists()) {
-         Log.d(className, "Path created: " + path.mkdirs());
+         // Log.d(className, "Path created: " + path.mkdirs());
       }
       File dbFile = new File(path, DB_FILENAME);
       if(dbFile.exists() && deleteDatabase) {
          SQLiteDatabase.deleteDatabase(dbFile);
          deleteDatabase = false;
       }
-      Log.d(className, "File: " + dbFile.getAbsolutePath());
+      // Log.d(className, "File: " + dbFile.getAbsolutePath());
       database = SQLiteDatabase.openOrCreateDatabase(dbFile, null);
 
       // Make sure the necessary tables exist
       // Profile table
-      Log.d(className, "Instruction: " + getTableCreateString(ProfileTable.TABLE_NAME,
-            ProfileTable.COLUMNS));
+      // Log.d(className, "Instruction: " + getTableCreateString(ProfileTable.TABLE_NAME, ProfileTable.COLUMNS));
       database.execSQL(getTableCreateString(ProfileTable.TABLE_NAME, ProfileTable.COLUMNS));
 
       // EMA table
-      Log.d(className, "Instruction: " + getTableCreateString(EMATable.TABLE_NAME, EMATable.COLUMNS));
+      // Log.d(className, "Instruction: " + getTableCreateString(EMATable.TABLE_NAME, EMATable.COLUMNS));
       database.execSQL(getTableCreateString(EMATable.TABLE_NAME, EMATable.COLUMNS));
 
       // Snapshot table
-      Log.d(className, "Instruction: " + getTableCreateString(SnapshotTable.TABLE_NAME,
-            SnapshotTable.COLUMNS));
+      // Log.d(className, "Instruction: " + getTableCreateString(SnapshotTable.TABLE_NAME, SnapshotTable.COLUMNS));
       database.execSQL(getTableCreateString(SnapshotTable.TABLE_NAME, SnapshotTable.COLUMNS));
 
       // SensorData table
-      Log.d(className, "Instruction: " + getTableCreateString(SensorDataTable.TABLE_NAME,
-            SensorDataTable.COLUMNS));
+      // Log.d(className, "Instruction: " + getTableCreateString(SensorDataTable.TABLE_NAME, SensorDataTable.COLUMNS));
       database.execSQL(getTableCreateString(SensorDataTable.TABLE_NAME, SensorDataTable.COLUMNS));
    }
 
@@ -120,12 +122,8 @@ public class DBAccess implements AMDBContract {
       Profile profile = Profile.getProfile();
       ContentValues cv = new ContentValues(2);
       cv.put("id", profile.getId());
-      ArrayList<ExistingCondition> conditions = profile.getConditions();
-      ArrayList<String> conditionStrings = new ArrayList<>(conditions.size());
-      for(ExistingCondition cond: conditions) {
-         conditionStrings.add(cond.toString());
-      }
-      cv.put("conditions", flatten(conditionStrings));
+      ArrayList<String> conditions = profile.getConditions();
+      cv.put("conditions", flatten(conditions));
       database.insertWithOnConflict(ProfileTable.TABLE_NAME, null, cv,
             SQLiteDatabase.CONFLICT_REPLACE);
    }
@@ -135,9 +133,9 @@ public class DBAccess implements AMDBContract {
     * @param data The set of SensorData to be saved
     * @return IDs of the records inserted into the table
     */
-   public long[] saveSensorData(ArrayList<SensorData> data) {
+   public ArrayList<Long> saveSensorData(ArrayList<SensorData> data) {
       // Create array of IDs to be used for this set of data
-      long[] ids = new long[data.size()];
+      ArrayList<Long> ids = new ArrayList<>(data.size());
 
       // Insert a new row into the table
       for(int i = 0; i < data.size(); i++) {
@@ -147,10 +145,10 @@ public class DBAccess implements AMDBContract {
          cv.put("shortName", datum.getShortName());
          cv.put("value", datum.getValue());
          cv.put("displayValue", datum.getDisplayValue());
-         ids[i] = database.insert(SensorDataTable.TABLE_NAME, null, cv);
+         ids.add(database.insert(SensorDataTable.TABLE_NAME, null, cv));
       }
 
-      Log.d(className, "lastId: " + ids[ids.length - 1]);
+      // Log.d(className, "lastId: " + ids.get(ids.size() - 1));
 
       // Return the IDs of the inserted rows
       return ids;
@@ -170,7 +168,7 @@ public class DBAccess implements AMDBContract {
          keepGoing = cursor.moveToNext();
       }
       cursor.close();
-      Log.d(className, "Highest id: " + highest);
+      // Log.d(className, "Highest id: " + highest);
       return highest;
    }
 
@@ -200,16 +198,12 @@ public class DBAccess implements AMDBContract {
       ArrayList<SensorData> data = snapshot.getData();
 
       // Save this set of data to the database and get their IDs
-      long[] sensorIds = access.saveSensorData(data);
+      ArrayList<Long> sensorIds = saveSensorData(data);
       String sensorIdString = flatten(sensorIds);
 
       // Get existing conditions as a String
-      ArrayList<ExistingCondition> conditions = snapshot.getConditions();
-      ArrayList<String> conditionList = new ArrayList<>(conditions.size());
-      for(ExistingCondition ec: conditions) {
-         conditionList.add(ec.toString());
-      }
-      String conditionString = flatten(conditionList);
+      ArrayList<String> conditions = snapshot.getConditions();
+      String conditionString = flatten(conditions);
 
       // Save the EMA and get its ID
       EcologicalMomentaryAssessment ema = snapshot.getEma();
@@ -236,32 +230,51 @@ public class DBAccess implements AMDBContract {
     * @param list The ArrayList
     * @return ArrayList, as a single String
     */
-   private static String flatten(ArrayList<String> list) {
+   private static String flatten(ArrayList list) {
       String result = "";
       for(int i = 0; i < list.size(); i++) {
          if(i > 0) {
-            result += ";";
+            result += ARRAY_SEPARATOR;
          }
-         result += list.get(i);
+         result += list.get(i).toString();
       }
       return result;
    }
 
    /**
-    * Converts an array of longs into a String of semicolon-separated values.
-    * @param array The array of longs
-    * @return array, as a single String
+    * Converts an ArrayList into a String of semicolon-separated values.
+    * @param list The ArrayList
+    * @return ArrayList, as a single String
     */
-   private static String flatten(long[] array) {
+/*
+   private static String flatten(ArrayList<String> list) {
       String result = "";
-      for(int i = 0; i < array.length; i++) {
+      for(int i = 0; i < list.size(); i++) {
          if(i > 0) {
-            result += ";";
+            result += ARRAY_SEPARATOR;
          }
-         result += array[i];
+         result += list.get(i);
       }
       return result;
    }
+*/
+   /**
+    * Converts an array of longs into a String of semicolon-separated values.
+    * @param list The array of longs
+    * @return The list, as a single String
+    */
+/*
+   private static String flatten(ArrayList<Long> list) {
+      String result = "";
+      for(int i = 0; i < list.size(); i++) {
+         if(i > 0) {
+            result += ARRAY_SEPARATOR;
+         }
+         result += array.get(i).toString();
+      }
+      return result;
+   }
+*/
 
    /**
     * Gets the ID from the current Profile. If no Profile exists, 0 is returned. If more than one
@@ -275,7 +288,7 @@ public class DBAccess implements AMDBContract {
       cursor.moveToFirst();
       long result;
       int count = cursor.getCount();
-      Log.d(className, "cursor count: " + count);
+      // Log.d(className, "cursor count: " + count);
       if(count == 0) {
          result = 0;
       }
@@ -289,28 +302,28 @@ public class DBAccess implements AMDBContract {
    }
 
    /**
-    * Attempts to populate an ArrayList of ExistingConditions from the Profile table. If no Profile
+    * Attempts to populate an ArrayList of existing conditions from the Profile table. If no Profile
     * exists, an empty ArrayList is returned. If more than one Profile exists, an
     * SQLiteFullException is thrown, as there should not be more than one Profile in the database.
-    * @return An ArrayList of ExistingConditions
+    * @return An ArrayList of existing conditions
     * @throws SQLiteFullException
     */
-   public ArrayList<ExistingCondition> getProfileConditions() throws SQLiteFullException {
+   public ArrayList<String> getProfileConditions() throws SQLiteFullException {
       Cursor cursor = database.rawQuery("SELECT conditions FROM " + ProfileTable.TABLE_NAME, null);
       cursor.moveToFirst();
-      ArrayList<ExistingCondition> conditions;
+      ArrayList<String> conditions;
       if(cursor.getCount() == 0) {
          conditions = new ArrayList<>();
-         Log.d(className, "No profile in database.");
+         // Log.d(className, "No profile in database.");
       }
       else if(cursor.getCount() == 1) {
          String conditionString = cursor.getString(0);
-         String[] conditionStrings = conditionString.split(";");
+         String[] conditionStrings = conditionString.split(ARRAY_SEPARATOR);
          conditions = new ArrayList<>(conditionStrings.length);
          for(String cond : conditionStrings) {
-            conditions.add(new ExistingCondition(cond));
+            conditions.add(cond);
          }
-         Log.d(className, "Profile in database; " + conditions.size() + " existing conditions.");
+         // Log.d(className, "Profile in database; " + conditions.size() + " existing conditions.");
       }
       else {
          throw new SQLiteFullException("Too many Profiles in database.");
@@ -318,10 +331,15 @@ public class DBAccess implements AMDBContract {
       return conditions;
    }
 
+   /**
+    * Returns a String representation of the specified table in the database.
+    * @param dbName The table to be represented
+    * @return String representation of the table
+    */
    public String toString(String dbName) {
       Cursor cursor = database.rawQuery("SELECT * FROM " + dbName, null);
       String[] cols = cursor.getColumnNames();
-      String result = "";
+      String result = "\n\n";
       for(String col: cols) {
          result += col + "   ";
       }
@@ -333,5 +351,149 @@ public class DBAccess implements AMDBContract {
          result += "\n";
       }
       return result;
+   }
+
+   /**
+    * Returns an ArrayList of all Snapshots associated with a user in the database.
+    * @param userId The ID of the user
+    * @return All Snapshots in the database
+    */
+   public ArrayList<Snapshot> getSnapshots(long userId) {
+      Cursor cursor = database.rawQuery("SELECT * FROM " + SnapshotTable.TABLE_NAME +
+            " WHERE userId = " + userId, null);
+      ArrayList<Snapshot> snaps = new ArrayList<>(cursor.getCount());
+      if(cursor.getCount() > 0) {
+         while(cursor.moveToNext()) {
+            snaps.add(getSnapshot(cursor.getInt(cursor.getColumnIndex("id"))));
+         }
+      }
+      return snaps;
+   }
+
+   /**
+    * Retrieves a Snapshot from the database. null is returned if there is no Snapshot with the
+    * specified ID.
+    * @param id The ID of the Snapshot to be retrieved
+    * @return The specified Snapshot, or null
+    */
+   public Snapshot getSnapshot(long id) {
+      Snapshot snap = null;
+      String[] selectionArgs = { "id = " + id } ;
+      Cursor cursor = database.rawQuery("SELECT * FROM " + SnapshotTable.TABLE_NAME +
+            " WHERE id = " + id, null);
+      if(cursor.getCount() > 0) {
+         cursor.moveToFirst();
+         long userId = cursor.getLong(cursor.getColumnIndex("userId"));
+         Date timestamp = new Date(cursor.getLong(cursor.getColumnIndex("timestamp")));
+
+         // Location is giving me trouble, so for now it is just null
+         Location location = null;
+
+         // Get sensor data. This involves getting a semicolon-separated String from the DB, converting
+         // it into an ArrayList of Longs, and constructing individual SensorData objects from the
+         // sensorData table using these IDs.
+         String flatSensorData = cursor.getString(cursor.getColumnIndex("sensorData"));
+         ArrayList<Long> sensorDataIds = unflatten(flatSensorData, DBDataType.LONG);
+         ArrayList<SensorData> data = getSensorData(sensorDataIds);
+         String flatConditions = cursor.getString(cursor.getColumnIndex("conditions"));
+         ArrayList<String> conditions = unflatten(flatConditions, DBDataType.STRING);
+         long emaId = cursor.getInt(cursor.getColumnIndex("ema"));
+         EcologicalMomentaryAssessment ema = getEMA(emaId);
+
+         snap = new Snapshot(userId, timestamp, location, data, conditions, ema);
+      }
+
+      return  snap;
+   }
+
+   /**
+    * Retrieves an EcologicalMomentaryAssessment from the database. null is returned if there is no
+    * EcologicalMomentaryAssessment with the specified ID.
+    * @param id The ID of the EcologicalMomentaryAssessment to be retrieved
+    * @return The specified EcologicalMomentaryAssessment, or null
+    */
+   private EcologicalMomentaryAssessment getEMA(long id) {
+      EcologicalMomentaryAssessment ema = null;
+      String[] selectionArgs = { "id = " + id } ;
+      Cursor cursor = database.rawQuery("SELECT * FROM " + EMATable.TABLE_NAME + " WHERE id = " + id, null);
+      if(cursor.getCount() > 0) {
+         cursor.moveToFirst();
+         boolean indoors = Boolean.parseBoolean(cursor.getString(cursor.getColumnIndex("indoors")));
+         String reportedLocation = cursor.getString(cursor.getColumnIndex("reportedLocation"));
+         String activity = cursor.getString(cursor.getColumnIndex("activity"));
+         String flatCompanions = cursor.getString(cursor.getColumnIndex("companions"));
+         ArrayList<String> companions = unflatten(flatCompanions, DBDataType.STRING);
+         int airQuality = cursor.getInt(cursor.getColumnIndex("airQuality"));
+         int belief = cursor.getInt(cursor.getColumnIndex("belief"));
+         int intention = cursor.getInt(cursor.getColumnIndex("intention"));
+         boolean behavior = Boolean.parseBoolean(cursor.getString(cursor.getColumnIndex("behavior")));
+         String barrier = cursor.getString(cursor.getColumnIndex("barrier"));
+
+         ema = new EcologicalMomentaryAssessment(indoors, reportedLocation, activity, companions,
+               airQuality, belief, intention, behavior, barrier);
+      }
+
+      return ema;
+   }
+
+   /**
+    * Returns an ArrayList of SensorData based on the IDs passed.
+    * @param ids The IDs of the desired SensorData records in the database
+    * @return ArrayList of SensorData
+    */
+   private ArrayList<SensorData> getSensorData(ArrayList<Long> ids) {
+      ArrayList<SensorData> data = new ArrayList<>(ids.size());
+      for(Long id: ids) {
+         data.add(getSensorData(id.longValue()));
+      }
+      return data;
+   }
+
+   /**
+    * Returns a SensorData built from the record with the specified ID. If the id does not exist,
+    * null is returned.
+    * @param id The ID of the desired record
+    * @return SensorData built from the specified record
+    */
+   private SensorData getSensorData(long id) {
+      SensorData data = null;
+      String[] selectionArgs = { "id = " + id };
+      Cursor cursor = database.rawQuery("SELECT * FROM " + SensorDataTable.TABLE_NAME + " WHERE id = " + id, null);
+      if(cursor.getCount() > 0) {
+         cursor.moveToFirst();
+
+         String displayName = cursor.getString(cursor.getColumnIndex("displayName"));
+         String shortName = cursor.getString(cursor.getColumnIndex("shortName"));
+         double value = cursor.getDouble(cursor.getColumnIndex("value"));
+         String displayValue = cursor.getString(cursor.getColumnIndex("displayValue"));
+
+         data = new SensorData(displayName, shortName, value, displayValue);
+      }
+      return data;
+   }
+
+   /**
+    * Expands a semicolon-separated String into an ArrayList of Strings
+    * @param str The semicolon-separated input String
+    * @return The input, as an ArrayList
+    */
+   private ArrayList unflatten(String str, DBDataType type) {
+      String[] strings = str.split(ARRAY_SEPARATOR);
+      ArrayList list = new ArrayList<>(strings.length);
+      for(String string: strings) {
+         switch(type) {
+            case LONG:
+               list.add(new Long(string));
+               break;
+            case STRING:
+               list.add(string);
+               break;
+         }
+      }
+      return list;
+   }
+
+   private enum DBDataType {
+      LONG, STRING;
    }
 }

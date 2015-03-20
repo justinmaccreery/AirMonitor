@@ -27,7 +27,7 @@ public class Profile {
    /**
     * Existing conditions
     */
-   private ArrayList<ExistingCondition> conditions;
+   private ArrayList<String> conditions;
 
    /**
     * Current instance of Profile
@@ -43,14 +43,14 @@ public class Profile {
       try {
          id = access.getProfileId();
          conditions = access.getProfileConditions();
-         Log.d(className, "Constructor: database accessed.");
+         // Log.d(className, "Constructor: database accessed.");
       }
       catch(SQLiteFullException sqlfe) {
          id = 0;
-         conditions = new ArrayList<ExistingCondition>();
+         conditions = new ArrayList<>();
          Log.w(className, "Too many Profiles in database; generating empty Profile.");
       }
-      Log.d(className, toString());
+      // Log.d(className, toString());
    }
 
    public static Profile getProfile() {
@@ -64,70 +64,54 @@ public class Profile {
     * Attempts to add a new condition to the user's Profile. Will not add a duplicate condition.
     * @param condition The condition to be added
     */
-   public void addCondition(ExistingCondition condition) {
+   public void addCondition(String condition) {
       boolean duplicate = false;
       boolean empty = false;
-      if(condition.getName().trim().length() == 0) {
+      if(condition.trim().length() == 0) {
          empty = true;
       }
-      for(ExistingCondition existing: conditions) {
-         if(existing.equals(condition)) {
+      for(String existing: conditions) {
+         if(existing.equalsIgnoreCase(condition)) {
             duplicate = true;
          }
       }
 
       if(duplicate) {
-         Log.d(className, "Failed to add " + condition.getName() + " (duplicate).");
+         // Log.d(className, "Failed to add " + condition + " (duplicate).");
       }
       else if(empty) {
-         Log.d(className, "Failed to add " + condition.getName() + " (empty).");
+         // Log.d(className, "Failed to add " + condition + " (empty).");
       }
       else {
          conditions.add(condition);
-         Log.d(className, "Adding " + condition.getName() + ".");
+         // Log.d(className, "Adding " + condition + ".");
 
          // Update database
          DBAccess.getDBAccess().updateProfile();
       }
-      Log.d(className, toString());
+      // Log.d(className, toString());
    }
 
    /**
-    * Attempts to add a new condition to the user's Profile. Will not add a duplicate condition.
-    * @param name The name of the condition to be added
-    */
-   public void addCondition(String name) {
-      addCondition(new ExistingCondition(name));
-   }
-
-   /**
-    * Attempts to remove the specified ExistingCondition from the Profile.
+    * Attempts to remove the specified condition from the Profile.
     * @param condition The condition to be removed
     */
-   public void removeCondition(ExistingCondition condition) {
+   public void removeCondition(String condition) {
       if(conditions.remove(condition)) {
-         Log.d(className, "Removing " + condition.getName() + ".");
+         // Log.d(className, "Removing " + condition + ".");
          DBAccess.getDBAccess().updateProfile();
       }
       else {
-         Log.d(className, "Failed to remove " + condition.getName() + ".");
+         // Log.d(className, "Failed to remove " + condition + ".");
       }
-      Log.d(className, toString());
-   }
-
-   /**
-    * Attempts to remove the specified ExistingCondition from the Profile.
-    * @param name The name of the condition to be removed
-    */
-   public void removeCondition(String name) {
-      removeCondition(new ExistingCondition(name));
+      // Log.d(className, toString());
    }
 
    /**
     * Returns the ArrayList of existing conditions.
     * @return ArrayList of existing conditions
     */
-   public ArrayList<ExistingCondition> getConditions() {
+   public ArrayList<String> getConditions() {
       return conditions;
    }
 

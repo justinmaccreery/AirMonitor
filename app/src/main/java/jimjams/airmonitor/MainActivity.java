@@ -21,6 +21,10 @@ import jimjams.airmonitor.sensordata.SensorDataGenerator;
 
 public class MainActivity extends ActionBarActivity {
 
+   final private static int FONT_UNIT = android.util.TypedValue.COMPLEX_UNIT_SP;
+
+   final private static float FONT_SIZE = 20;
+
    @Override
    protected void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
@@ -67,6 +71,7 @@ public class MainActivity extends ActionBarActivity {
 
       TextView tv = new TextView(this);
       tv.setTypeface(tv.getTypeface(), Typeface.BOLD);
+      tv.setTextSize(FONT_UNIT, FONT_SIZE);
 
       if(data == null || data.size() == 0) {
          tv.setText(getResources().getString(R.string.mainScreen_airQualityInset_no_data));
@@ -82,9 +87,11 @@ public class MainActivity extends ActionBarActivity {
             TextView label = new TextView(this), value = new TextView(this);
             label.setText(sd.getDisplayName());
             label.setPadding(2, 2, 2, 5);
+            label.setTextSize(FONT_UNIT, FONT_SIZE);
             value.setText(sd.getDisplayValue());
             value.setPadding(5, 2, 2, 2);
             value.setGravity(Gravity.END);
+            value.setTextSize(FONT_UNIT, FONT_SIZE);
             tr.addView(label);
             tr.addView(value);
             aqi.addView(tr);
@@ -97,7 +104,7 @@ public class MainActivity extends ActionBarActivity {
     * @param emaBtn The EMA button on the main screen
     */
    public void on_MainScreen_EMA_button_Click(View emaBtn) {
-      Intent intent = new Intent(this, EMAScreenActivity.class);
+      Intent intent = new Intent(this, EMAActivity.class);
       startActivity(intent);
    }
 
@@ -107,5 +114,14 @@ public class MainActivity extends ActionBarActivity {
     */
    public void on_MainScreen_refresh_button_Click(View rfrshBtn) {
       refreshAQInset();
+   }
+
+   /**
+    * Invoked when the history button on the main screen is clicked.
+    * @param histBtn The history button on the main screen
+    */
+   public void on_MainScreen_hist_button_Click(View histBtn) {
+      Intent intent = new Intent(this, HistoryActivity.class);
+      startActivity(intent);
    }
 }

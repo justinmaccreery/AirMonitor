@@ -22,14 +22,14 @@ import java.util.Arrays;
 import jimjams.airmonitor.database.AMDBContract;
 import jimjams.airmonitor.database.DBAccess;
 import jimjams.airmonitor.datastructure.EcologicalMomentaryAssessment;
-import jimjams.airmonitor.datastructure.ExistingCondition;
 import jimjams.airmonitor.datastructure.Profile;
 import jimjams.airmonitor.datastructure.Snapshot;
 import jimjams.airmonitor.sensordata.SensorData;
 import jimjams.airmonitor.sensordata.SensorDataGenerator;
 
 
-public class EMAScreenActivity extends ActionBarActivity {
+public class
+      EMAActivity extends ActionBarActivity {
 
    /**
     * Used to identify source class for log
@@ -39,7 +39,7 @@ public class EMAScreenActivity extends ActionBarActivity {
    @Override
    protected void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
-      setContentView(R.layout.activity_ema_screen);
+      setContentView(R.layout.activity_ema);
    }
 
    @Override
@@ -69,7 +69,7 @@ public class EMAScreenActivity extends ActionBarActivity {
     */
    protected void onStart() {
       super.onStart();
-      Log.d(className, DBAccess.getDBAccess().toString(AMDBContract.ProfileTable.TABLE_NAME));
+      // Log.d(className, DBAccess.getDBAccess().toString(AMDBContract.ProfileTable.TABLE_NAME));
       refreshExistingConditions();
    }
 
@@ -90,14 +90,15 @@ public class EMAScreenActivity extends ActionBarActivity {
 
       // Current set of existing conditions, taken from the Profile (note that the Profile is
       // updated every time a condition is added or deleted)
-      ArrayList<ExistingCondition> conditions = profile.getConditions();
+      ArrayList<String> conditions = profile.getConditions();
 
       // Current EMA, taken from the EMA screen
       EcologicalMomentaryAssessment ema = getEma();
 
       Snapshot snapshot = new Snapshot(data, conditions, ema, this);
       long snapshotId = access.saveSnapshot(snapshot);
-      Log.d(className, snapshot.toString());
+      // Log.d(className, snapshot.toString());
+      // Log.d(className, DBAccess.getDBAccess().toString(AMDBContract.SnapshotTable.TABLE_NAME));
    }
 
    /**
@@ -106,7 +107,7 @@ public class EMAScreenActivity extends ActionBarActivity {
     */
    private EcologicalMomentaryAssessment getEma() {
 
-      Log.d(className, "Creating EMA.");
+      // Log.d(className, "Creating EMA.");
 
       // Get the indoors value
       RadioGroup indoorsRg = (RadioGroup)findViewById(R.id.ema_screen_in_or_out_group);
@@ -181,7 +182,7 @@ public class EMAScreenActivity extends ActionBarActivity {
     * Refreshes the list of existing conditions based on profile.
     */
    private void refreshExistingConditions() {
-      Log.d(className, "Refreshing existing conditions list.");
+      // Log.d(className, "Refreshing existing conditions list.");
       Profile profile = Profile.getProfile();
       TableLayout layout = (TableLayout)findViewById(R.id.ema_screen_existing_table);
 
@@ -192,10 +193,10 @@ public class EMAScreenActivity extends ActionBarActivity {
       DeleteButtonListener listener = new DeleteButtonListener();
 
       // Create a new TableRow for each existing condition
-      for(ExistingCondition condition: profile.getConditions()) {
+      for(String condition: profile.getConditions()) {
          TableRow tr = new TableRow(this);
          TextView label = new TextView(this);
-         label.setText(condition.getName());
+         label.setText(condition);
          DeleteButton delBtn = new DeleteButton(this, condition);
          delBtn.setOnClickListener(listener);
          tr.addView(label);
@@ -212,11 +213,11 @@ public class EMAScreenActivity extends ActionBarActivity {
    private static String normalize(String str) {
       return str.replaceAll("\\s", " ").trim();
    }
+
    /**
     * Listener for DeleteButtons
     */
    private class DeleteButtonListener implements View.OnClickListener {
-
       /**
        * Invoked when a DeleteButton is clicked
        * @param v The DeleteButton
@@ -228,33 +229,29 @@ public class EMAScreenActivity extends ActionBarActivity {
          refreshExistingConditions();
       }
    }
-
    /**
     * Button subclass to associate a condition with the Button
     */
    private class DeleteButton extends Button {
-
       /**
        * The associated condition
        */
-      private ExistingCondition condition;
-
+      private String condition;
       /**
        * Constructor.
-       * @param context   Context (the containing Activity)
+       * @param context Context (the containing Activity)
        * @param condition The associated condition
        */
-      DeleteButton(Context context, ExistingCondition condition) {
+      DeleteButton(Context context, String condition) {
          super(context);
          this.condition = condition;
          setText("X");
       }
-
       /**
        * Returns the associated condition.
        * @return The associated condition
        */
-      ExistingCondition getCondition() {
+      String getCondition() {
          return condition;
       }
    }
