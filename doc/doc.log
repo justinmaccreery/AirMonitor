@@ -1,22 +1,22 @@
 Loading source files for package jimjams.airmonitor...
 [parsing started RegularFileObject[.\jimjams\airmonitor\EMAActivity.java]]
-[parsing completed 63ms]
+[parsing completed 78ms]
 [parsing started RegularFileObject[.\jimjams\airmonitor\HistoryActivity.java]]
-[parsing completed 16ms]
+[parsing completed 15ms]
 [parsing started RegularFileObject[.\jimjams\airmonitor\MainActivity.java]]
-[parsing completed 0ms]
+[parsing completed 16ms]
 Loading source files for package jimjams.airmonitor.database...
 [parsing started RegularFileObject[.\jimjams\airmonitor\database\AMDBContract.java]]
 [parsing completed 0ms]
 [parsing started RegularFileObject[.\jimjams\airmonitor\database\DBAccess.java]]
-[parsing completed 32ms]
+[parsing completed 47ms]
 Loading source files for package jimjams.airmonitor.datastructure...
 [parsing started RegularFileObject[.\jimjams\airmonitor\datastructure\EcologicalMomentaryAssessment.java]]
 [parsing completed 0ms]
 [parsing started RegularFileObject[.\jimjams\airmonitor\datastructure\Profile.java]]
-[parsing completed 15ms]
+[parsing completed 16ms]
 [parsing started RegularFileObject[.\jimjams\airmonitor\datastructure\Snapshot.java]]
-[parsing completed 0ms]
+[parsing completed 16ms]
 Loading source files for package jimjams.airmonitor.sensordata...
 [parsing started RegularFileObject[.\jimjams\airmonitor\sensordata\SensorData.java]]
 [parsing completed 0ms]
@@ -122,43 +122,43 @@ import android.location.LocationManager;
                                                ^
   symbol:   class View
   location: class EMAActivity
-.\jimjams\airmonitor\EMAActivity.java:268: error: cannot find symbol
+.\jimjams\airmonitor\EMAActivity.java:269: error: cannot find symbol
    public void on_EMA_Screen_cancel_button_click(View cancelBtn) {
                                                  ^
   symbol:   class View
   location: class EMAActivity
-.\jimjams\airmonitor\EMAActivity.java:277: error: cannot find symbol
+.\jimjams\airmonitor\EMAActivity.java:278: error: cannot find symbol
    public void on_EMA_Screen_add_button_click(View addBtn) {
                                               ^
   symbol:   class View
   location: class EMAActivity
-.\jimjams\airmonitor\database\DBAccess.java:32: error: cannot find symbol
+.\jimjams\airmonitor\database\DBAccess.java:33: error: cannot find symbol
    private SQLiteDatabase database;
            ^
   symbol:   class SQLiteDatabase
   location: class DBAccess
-.\jimjams\airmonitor\database\DBAccess.java:225: error: cannot find symbol
+.\jimjams\airmonitor\database\DBAccess.java:226: error: cannot find symbol
    public long getProfileId() throws SQLiteFullException {
                                      ^
   symbol:   class SQLiteFullException
   location: class DBAccess
-.\jimjams\airmonitor\database\DBAccess.java:251: error: cannot find symbol
-   public ArrayList<String> getProfileConditions() throws SQLiteFullException {
-                                                          ^
+.\jimjams\airmonitor\database\DBAccess.java:252: error: cannot find symbol
+   public List<String> getProfileConditions() throws SQLiteFullException {
+                                                     ^
   symbol:   class SQLiteFullException
   location: class DBAccess
-.\jimjams\airmonitor\datastructure\Snapshot.java:34: error: cannot find symbol
+.\jimjams\airmonitor\datastructure\Snapshot.java:33: error: cannot find symbol
    private Location location;
            ^
   symbol:   class Location
   location: class Snapshot
-.\jimjams\airmonitor\datastructure\Snapshot.java:60: error: cannot find symbol
-                   EcologicalMomentaryAssessment ema, Context context) {
-                                                      ^
+.\jimjams\airmonitor\datastructure\Snapshot.java:59: error: cannot find symbol
+         EcologicalMomentaryAssessment ema, Context context) {
+                                            ^
   symbol:   class Context
   location: class Snapshot
-.\jimjams\airmonitor\datastructure\Snapshot.java:85: error: cannot find symbol
-    public Snapshot(long userId, Date timestamp, Location location, ArrayList<SensorData> data, ArrayList<String> conditions, EcologicalMomentaryAssessment ema) {
+.\jimjams\airmonitor\datastructure\Snapshot.java:84: error: cannot find symbol
+    public Snapshot(long userId, Date timestamp, Location location, List<SensorData> data,
                                                  ^
   symbol:   class Location
   location: class Snapshot
@@ -167,20 +167,20 @@ import android.location.LocationManager;
           ^
   symbol:   class Location
   location: class Snapshot
-.\jimjams\airmonitor\EMAActivity.java:324: error: package View does not exist
+.\jimjams\airmonitor\EMAActivity.java:325: error: package View does not exist
    private class DeleteButtonListener implements View.OnClickListener {
                                                      ^
-.\jimjams\airmonitor\EMAActivity.java:329: error: cannot find symbol
+.\jimjams\airmonitor\EMAActivity.java:330: error: cannot find symbol
       public void onClick(View v) {
                           ^
   symbol:   class View
   location: class EMAActivity.DeleteButtonListener
-.\jimjams\airmonitor\EMAActivity.java:339: error: cannot find symbol
+.\jimjams\airmonitor\EMAActivity.java:340: error: cannot find symbol
    private class DeleteButton extends Button {
                                       ^
   symbol:   class Button
   location: class EMAActivity
-.\jimjams\airmonitor\EMAActivity.java:349: error: cannot find symbol
+.\jimjams\airmonitor\EMAActivity.java:350: error: cannot find symbol
       DeleteButton(Context context, String condition) {
                    ^
   symbol:   class Context
@@ -221,21 +221,21 @@ import android.widget.TableRow;
 .\jimjams\airmonitor\HistoryActivity.java:14: error: package android.widget does not exist
 import android.widget.TextView;
                      ^
-.\jimjams\airmonitor\HistoryActivity.java:26: error: cannot find symbol
+.\jimjams\airmonitor\HistoryActivity.java:27: error: cannot find symbol
 public class HistoryActivity extends ActionBarActivity {
                                      ^
   symbol: class ActionBarActivity
-.\jimjams\airmonitor\HistoryActivity.java:54: error: cannot find symbol
+.\jimjams\airmonitor\HistoryActivity.java:55: error: cannot find symbol
    protected void onCreate(Bundle savedInstanceState) {
                            ^
   symbol:   class Bundle
   location: class HistoryActivity
-.\jimjams\airmonitor\HistoryActivity.java:60: error: cannot find symbol
+.\jimjams\airmonitor\HistoryActivity.java:61: error: cannot find symbol
    public boolean onCreateOptionsMenu(Menu menu) {
                                       ^
   symbol:   class Menu
   location: class HistoryActivity
-.\jimjams\airmonitor\HistoryActivity.java:67: error: cannot find symbol
+.\jimjams\airmonitor\HistoryActivity.java:68: error: cannot find symbol
    public boolean onOptionsItemSelected(MenuItem item) {
                                         ^
   symbol:   class MenuItem
@@ -345,14 +345,14 @@ public class MainActivity extends ActionBarActivity {
   location: interface AMDBContract
 [search path for source files: .,C:\jing\jing-20081028\bin]
 [search path for class files: C:\Program Files\Java\jdk1.8.0_05\jre\lib\resources.jar,C:\Program Files\Java\jdk1.8.0_05\jre\lib\rt.jar,C:\Program Files\Java\jdk1.8.0_05\jre\lib\sunrsasign.jar,C:\Program Files\Java\jdk1.8.0_05\jre\lib\jsse.jar,C:\Program Files\Java\jdk1.8.0_05\jre\lib\jce.jar,C:\Program Files\Java\jdk1.8.0_05\jre\lib\charsets.jar,C:\Program Files\Java\jdk1.8.0_05\jre\lib\jfr.jar,C:\Program Files\Java\jdk1.8.0_05\jre\classes,C:\Program Files\Java\jdk1.8.0_05\jre\lib\ext\access-bridge-64.jar,C:\Program Files\Java\jdk1.8.0_05\jre\lib\ext\cldrdata.jar,C:\Program Files\Java\jdk1.8.0_05\jre\lib\ext\dnsns.jar,C:\Program Files\Java\jdk1.8.0_05\jre\lib\ext\jaccess.jar,C:\Program Files\Java\jdk1.8.0_05\jre\lib\ext\jfxrt.jar,C:\Program Files\Java\jdk1.8.0_05\jre\lib\ext\localedata.jar,C:\Program Files\Java\jdk1.8.0_05\jre\lib\ext\nashorn.jar,C:\Program Files\Java\jdk1.8.0_05\jre\lib\ext\sunec.jar,C:\Program Files\Java\jdk1.8.0_05\jre\lib\ext\sunjce_provider.jar,C:\Program Files\Java\jdk1.8.0_05\jre\lib\ext\sunmscapi.jar,C:\Program Files\Java\jdk1.8.0_05\jre\lib\ext\sunpkcs11.jar,C:\Program Files\Java\jdk1.8.0_05\jre\lib\ext\zipfs.jar,.,C:\jing\jing-20081028\bin]
-[loading ZipFileIndexFileObject[C:\Program Files\Java\jdk1.8.0_05\jre\lib\rt.jar(java/util/ArrayList.class)]]
 [loading ZipFileIndexFileObject[C:\Program Files\Java\jdk1.8.0_05\jre\lib\rt.jar(java/util/Arrays.class)]]
 [loading ZipFileIndexFileObject[C:\Program Files\Java\jdk1.8.0_05\jre\lib\rt.jar(java/util/Comparator.class)]]
+[loading ZipFileIndexFileObject[C:\Program Files\Java\jdk1.8.0_05\jre\lib\rt.jar(java/util/List.class)]]
 [loading ZipFileIndexFileObject[C:\Program Files\Java\jdk1.8.0_05\jre\lib\rt.jar(java/lang/String.class)]]
 [loading ZipFileIndexFileObject[C:\Program Files\Java\jdk1.8.0_05\jre\lib\rt.jar(java/io/File.class)]]
+[loading ZipFileIndexFileObject[C:\Program Files\Java\jdk1.8.0_05\jre\lib\rt.jar(java/util/ArrayList.class)]]
 [loading ZipFileIndexFileObject[C:\Program Files\Java\jdk1.8.0_05\jre\lib\rt.jar(java/util/Date.class)]]
 [loading ZipFileIndexFileObject[C:\Program Files\Java\jdk1.8.0_05\jre\lib\rt.jar(java/lang/Object.class)]]
-[loading ZipFileIndexFileObject[C:\Program Files\Java\jdk1.8.0_05\jre\lib\rt.jar(java/util/List.class)]]
 [loading ZipFileIndexFileObject[C:\Program Files\Java\jdk1.8.0_05\jre\lib\rt.jar(java/text/DecimalFormat.class)]]
 [loading ZipFileIndexFileObject[C:\Program Files\Java\jdk1.8.0_05\jre\lib\rt.jar(java/lang/Long.class)]]
 [loading ZipFileIndexFileObject[C:\Program Files\Java\jdk1.8.0_05\jre\lib\rt.jar(java/lang/Override.class)]]
@@ -368,16 +368,16 @@ public class MainActivity extends ActionBarActivity {
 Standard Doclet version 1.8.0_05
 Building tree for all the packages and classes...
 Generating C:\android\projects\AirMonitor\doc\jimjams\airmonitor\EMAActivity.html...
-.\jimjams\airmonitor\EMAActivity.java:317: warning: no @param for str
+.\jimjams\airmonitor\EMAActivity.java:318: warning: no @param for str
    private static String normalize(String str) {
                          ^
 Generating C:\android\projects\AirMonitor\doc\jimjams\airmonitor\EMAActivity.DeleteButton.html...
 Generating C:\android\projects\AirMonitor\doc\jimjams\airmonitor\EMAActivity.DeleteButtonListener.html...
 [loading ZipFileIndexFileObject[C:\Program Files\Java\jdk1.8.0_05\jre\lib\rt.jar(java/io/Serializable.class)]]
 Generating C:\android\projects\AirMonitor\doc\jimjams\airmonitor\HistoryActivity.html...
-.\jimjams\airmonitor\EMAActivity.java:34: error: package android.util does not exist
-    */
-^
+.\jimjams\airmonitor\EMAActivity.java:35: error: package android.util does not exist
+   private String className = getClass().getSimpleName();
+                    ^
 Generating C:\android\projects\AirMonitor\doc\jimjams\airmonitor\HistoryActivity.ExpansionListener.html...
 Generating C:\android\projects\AirMonitor\doc\jimjams\airmonitor\MainActivity.html...
 .\jimjams\airmonitor\EMAActivity.java:25: error: package android.util does not exist
@@ -389,48 +389,41 @@ Generating C:\android\projects\AirMonitor\doc\jimjams\airmonitor\database\AMDBCo
 Generating C:\android\projects\AirMonitor\doc\jimjams\airmonitor\database\AMDBContract.SensorDataTable.html...
 Generating C:\android\projects\AirMonitor\doc\jimjams\airmonitor\database\AMDBContract.SnapshotTable.html...
 Generating C:\android\projects\AirMonitor\doc\jimjams\airmonitor\database\DBAccess.html...
-.\jimjams\airmonitor\database\DBAccess.java:153: warning: no @return
+.\jimjams\airmonitor\database\DBAccess.java:154: warning: no @return
    public long saveEMA(EcologicalMomentaryAssessment ema) {
                ^
-.\jimjams\airmonitor\database\DBAccess.java:223: error: reference not found
+.\jimjams\airmonitor\database\DBAccess.java:224: error: reference not found
     * @throws SQLiteFullException if the database contains more than one Profile
       ^
-.\jimjams\airmonitor\database\DBAccess.java:249: error: reference not found
+.\jimjams\airmonitor\database\DBAccess.java:250: error: reference not found
     * @throws SQLiteFullException
       ^
-.\jimjams\airmonitor\database\DBAccess.java:249: warning: no description for @throws
+.\jimjams\airmonitor\database\DBAccess.java:250: warning: no description for @throws
     * @throws SQLiteFullException
       ^
 Generating C:\android\projects\AirMonitor\doc\jimjams\airmonitor\datastructure\EcologicalMomentaryAssessment.html...
 Generating C:\android\projects\AirMonitor\doc\jimjams\airmonitor\datastructure\Profile.html...
 Generating C:\android\projects\AirMonitor\doc\jimjams\airmonitor\datastructure\Snapshot.html...
-.\jimjams\airmonitor\datastructure\Snapshot.java:85: warning: no @param for userId
-    public Snapshot(long userId, Date timestamp, Location location, ArrayList<SensorData> data, ArrayList<String> conditions, EcologicalMomentaryAssessment ema) {
+.\jimjams\airmonitor\datastructure\Snapshot.java:84: warning: no @param for userId
+    public Snapshot(long userId, Date timestamp, Location location, List<SensorData> data,
            ^
-.\jimjams\airmonitor\datastructure\Snapshot.java:85: warning: no @param for timestamp
-    public Snapshot(long userId, Date timestamp, Location location, ArrayList<SensorData> data, ArrayList<String> conditions, EcologicalMomentaryAssessment ema) {
+.\jimjams\airmonitor\datastructure\Snapshot.java:84: warning: no @param for timestamp
+    public Snapshot(long userId, Date timestamp, Location location, List<SensorData> data,
            ^
-.\jimjams\airmonitor\datastructure\Snapshot.java:85: warning: no @param for location
-    public Snapshot(long userId, Date timestamp, Location location, ArrayList<SensorData> data, ArrayList<String> conditions, EcologicalMomentaryAssessment ema) {
+.\jimjams\airmonitor\datastructure\Snapshot.java:84: warning: no @param for location
+    public Snapshot(long userId, Date timestamp, Location location, List<SensorData> data,
            ^
-.\jimjams\airmonitor\datastructure\Snapshot.java:85: warning: no @param for data
-    public Snapshot(long userId, Date timestamp, Location location, ArrayList<SensorData> data, ArrayList<String> conditions, EcologicalMomentaryAssessment ema) {
+.\jimjams\airmonitor\datastructure\Snapshot.java:84: warning: no @param for data
+    public Snapshot(long userId, Date timestamp, Location location, List<SensorData> data,
            ^
-.\jimjams\airmonitor\datastructure\Snapshot.java:85: warning: no @param for conditions
-    public Snapshot(long userId, Date timestamp, Location location, ArrayList<SensorData> data, ArrayList<String> conditions, EcologicalMomentaryAssessment ema) {
+.\jimjams\airmonitor\datastructure\Snapshot.java:84: warning: no @param for conditions
+    public Snapshot(long userId, Date timestamp, Location location, List<SensorData> data,
            ^
-.\jimjams\airmonitor\datastructure\Snapshot.java:85: warning: no @param for ema
-    public Snapshot(long userId, Date timestamp, Location location, ArrayList<SensorData> data, ArrayList<String> conditions, EcologicalMomentaryAssessment ema) {
+.\jimjams\airmonitor\datastructure\Snapshot.java:84: warning: no @param for ema
+    public Snapshot(long userId, Date timestamp, Location location, List<SensorData> data,
            ^
 Generating C:\android\projects\AirMonitor\doc\jimjams\airmonitor\sensordata\SensorData.html...
-.\jimjams\airmonitor\sensordata\SensorData.java:61: error: @param name not found
-    * @param decimalValue Display value of the data
-             ^
-.\jimjams\airmonitor\sensordata\SensorData.java:63: warning: no @param for displayValue
-   public SensorData(String displayName, String shortName, double value, String displayValue) {
-          ^
 Generating C:\android\projects\AirMonitor\doc\jimjams\airmonitor\sensordata\SensorDataGenerator.html...
-.\jimjams\airmonitor\sensordata\SensorDataGenerator.java:22: warning - Tag @link: missing '#': "getData()"
 Generating C:\android\projects\AirMonitor\doc\jimjams\airmonitor\sensordata\SensorDataGenerator.DataCategory.html...
 Generating C:\android\projects\AirMonitor\doc\overview-frame.html...
 Generating C:\android\projects\AirMonitor\doc\jimjams\airmonitor\package-frame.html...
@@ -456,6 +449,6 @@ Generating C:\android\projects\AirMonitor\doc\allclasses-noframe.html...
 Generating C:\android\projects\AirMonitor\doc\index.html...
 Generating C:\android\projects\AirMonitor\doc\overview-summary.html...
 Generating C:\android\projects\AirMonitor\doc\help-doc.html...
-[done in 3147 ms]
-5 errors
-96 warnings
+[done in 3354 ms]
+4 errors
+94 warnings

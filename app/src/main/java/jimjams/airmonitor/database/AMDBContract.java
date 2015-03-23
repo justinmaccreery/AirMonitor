@@ -10,7 +10,7 @@ public interface AMDBContract {
    /**
     * Database path
     */
-   public final static String DB_PATH = "/data/data/jimjams.airmonitor";
+   public final static String DB_DIR = "/data/data/jimjams.airmonitor";
 
    /**
     * Database name

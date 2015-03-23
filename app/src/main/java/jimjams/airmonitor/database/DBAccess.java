@@ -10,6 +10,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import jimjams.airmonitor.datastructure.EcologicalMomentaryAssessment;
 import jimjams.airmonitor.datastructure.Profile;
@@ -117,7 +118,7 @@ public class DBAccess implements AMDBContract {
       Profile profile = Profile.getProfile();
       ContentValues cv = new ContentValues(2);
       cv.put("id", profile.getId());
-      ArrayList<String> conditions = profile.getConditions();
+      List<String> conditions = profile.getConditions();
       cv.put("conditions", flatten(conditions));
       database.insertWithOnConflict(ProfileTable.TABLE_NAME, null, cv,
             SQLiteDatabase.CONFLICT_REPLACE);
@@ -128,9 +129,9 @@ public class DBAccess implements AMDBContract {
     * @param data The set of SensorData to be saved
     * @return IDs of the records inserted into the table
     */
-   public ArrayList<Long> saveSensorData(ArrayList<SensorData> data) {
+   public List<Long> saveSensorData(List<SensorData> data) {
       // Create array of IDs to be used for this set of data
-      ArrayList<Long> ids = new ArrayList<>(data.size());
+      List<Long> ids = new ArrayList<>(data.size());
 
       // Insert a new row into the table
       for(int i = 0; i < data.size(); i++) {
@@ -169,14 +170,14 @@ public class DBAccess implements AMDBContract {
 
    public long saveSnapshot(Snapshot snapshot) {
       // Save data structures from Snapshot
-      ArrayList<SensorData> data = snapshot.getData();
+      List<SensorData> data = snapshot.getData();
 
       // Save this set of data to the database and get their IDs
-      ArrayList<Long> sensorIds = saveSensorData(data);
+      List<Long> sensorIds = saveSensorData(data);
       String sensorIdString = flatten(sensorIds);
 
       // Get existing conditions as a String
-      ArrayList<String> conditions = snapshot.getConditions();
+      List<String> conditions = snapshot.getConditions();
       String conditionString = flatten(conditions);
 
       // Save the EMA and get its ID
@@ -200,11 +201,11 @@ public class DBAccess implements AMDBContract {
    }
 
    /**
-    * Converts an ArrayList into a String of semicolon-separated values.
-    * @param list The ArrayList
-    * @return ArrayList, as a single String
+    * Converts a List into a String of semicolon-separated values.
+    * @param list The List
+    * @return List, as a single String
     */
-   private static String flatten(ArrayList list) {
+   private static String flatten(List list) {
       String result = "";
       for(int i = 0; i < list.size(); i++) {
          if(i > 0) {
@@ -242,16 +243,16 @@ public class DBAccess implements AMDBContract {
    }
 
    /**
-    * Attempts to populate an ArrayList of existing conditions from the Profile table. If no Profile
-    * exists, an empty ArrayList is returned. If more than one Profile exists, an
-    * SQLiteFullException is thrown, as there should not be more than one Profile in the database.
-    * @return An ArrayList of existing conditions
+    * Attempts to populate a List of existing conditions from the Profile table. If no Profile
+    * exists, an empty List is returned. If more than one Profile exists, an SQLiteFullException is
+    * thrown, as there should not be more than one Profile in the database.
+    * @return A List of existing conditions
     * @throws SQLiteFullException
     */
-   public ArrayList<String> getProfileConditions() throws SQLiteFullException {
+   public List<String> getProfileConditions() throws SQLiteFullException {
       Cursor cursor = database.rawQuery("SELECT conditions FROM " + ProfileTable.TABLE_NAME, null);
       cursor.moveToFirst();
-      ArrayList<String> conditions;
+      List<String> conditions;
       if(cursor.getCount() == 0) {
          conditions = new ArrayList<>();
          // Log.d(className, "No profile in database.");
@@ -259,8 +260,7 @@ public class DBAccess implements AMDBContract {
       else if(cursor.getCount() == 1) {
          String conditionString = cursor.getString(0);
          String[] conditionStrings = conditionString.split(ARRAY_SEPARATOR);
-         conditions = new ArrayList<>(conditionStrings.length);
-         conditions.addAll(Arrays.asList(conditionStrings));
+         conditions = Arrays.asList(conditionStrings);
       }
       else {
          throw new SQLiteFullException("Too many Profiles in database.");
@@ -293,14 +293,14 @@ public class DBAccess implements AMDBContract {
    }
 
    /**
-    * Returns an ArrayList of all Snapshots associated with a user in the database.
+    * Returns a List of all Snapshots associated with a user in the database.
     * @param userId The ID of the user
     * @return All Snapshots in the database
     */
-   public ArrayList<Snapshot> getSnapshots(long userId) {
+   public List<Snapshot> getSnapshots(long userId) {
       Cursor cursor = database.rawQuery("SELECT * FROM " + SnapshotTable.TABLE_NAME +
             " WHERE userId = " + userId, null);
-      ArrayList<Snapshot> snaps = new ArrayList<>(cursor.getCount());
+      List<Snapshot> snaps = new ArrayList<>(cursor.getCount());
       if(cursor.getCount() > 0) {
          while(cursor.moveToNext()) {
             snaps.add(getSnapshot(cursor.getInt(cursor.getColumnIndex("id"))));
@@ -329,13 +329,13 @@ public class DBAccess implements AMDBContract {
          Location location = null;
 
          // Get sensor data. This involves getting a semicolon-separated String from the DB, converting
-         // it into an ArrayList of Longs, and constructing individual SensorData objects from the
+         // it into a List of Longs, and constructing individual SensorData objects from the
          // sensorData table using these IDs.
          String flatSensorData = cursor.getString(cursor.getColumnIndex("sensorData"));
-         ArrayList<Long> sensorDataIds = inflateLong(flatSensorData);
-         ArrayList<SensorData> data = getSensorData(sensorDataIds);
+         List<Long> sensorDataIds = inflateLong(flatSensorData);
+         List<SensorData> data = getSensorData(sensorDataIds);
          String flatConditions = cursor.getString(cursor.getColumnIndex("conditions"));
-         ArrayList<String> conditions = inflateString(flatConditions);
+         List<String> conditions = inflateString(flatConditions);
          long emaId = cursor.getInt(cursor.getColumnIndex("ema"));
          EcologicalMomentaryAssessment ema = getEMA(emaId);
 
@@ -360,7 +360,7 @@ public class DBAccess implements AMDBContract {
          String reportedLocation = cursor.getString(cursor.getColumnIndex("reportedLocation"));
          String activity = cursor.getString(cursor.getColumnIndex("activity"));
          String flatCompanions = cursor.getString(cursor.getColumnIndex("companions"));
-         ArrayList<String> companions = inflateString(flatCompanions);
+         List<String> companions = inflateString(flatCompanions);
          int airQuality = cursor.getInt(cursor.getColumnIndex("airQuality"));
          int belief = cursor.getInt(cursor.getColumnIndex("belief"));
          int intention = cursor.getInt(cursor.getColumnIndex("intention"));
@@ -375,12 +375,12 @@ public class DBAccess implements AMDBContract {
    }
 
    /**
-    * Returns an ArrayList of SensorData based on the IDs passed.
+    * Returns a List of SensorData based on the IDs passed.
     * @param ids The IDs of the desired SensorData records in the database
-    * @return ArrayList of SensorData
+    * @return List of SensorData
     */
-   private ArrayList<SensorData> getSensorData(ArrayList<Long> ids) {
-      ArrayList<SensorData> data = new ArrayList<>(ids.size());
+   private List<SensorData> getSensorData(List<Long> ids) {
+      List<SensorData> data = new ArrayList<>(ids.size());
       for(Long id: ids) {
          data.add(getSensorData(id));
       }
@@ -412,13 +412,13 @@ public class DBAccess implements AMDBContract {
    }
 
    /**
-    * Expands a semicolon-separated String into an ArrayList of Strings
+    * Expands a semicolon-separated String into a List of Strings
     * @param str The semicolon-separated input String
-    * @return The input, as an ArrayList
+    * @return The input, as a List
     */
-   private ArrayList<String> inflateString(String str) {
+   private List<String> inflateString(String str) {
       String[] strings = str.split(ARRAY_SEPARATOR);
-      ArrayList<String> list = new ArrayList<>(strings.length);
+      List<String> list = new ArrayList<>(strings.length);
       for(String string: strings) {
          list.add(string);
       }
@@ -426,13 +426,13 @@ public class DBAccess implements AMDBContract {
    }
 
    /**
-    * Expands a semicolon-separated String into an ArrayList of Longs
+    * Expands a semicolon-separated String into a List of Longs
     * @param str The semicolon-separated input String
-    * @return The input, as an ArrayList
+    * @return The input, as a List
     */
-   private ArrayList<Long> inflateLong(String str) {
+   private List<Long> inflateLong(String str) {
       String[] strings = str.split(ARRAY_SEPARATOR);
-      ArrayList<Long> list = new ArrayList<>(strings.length);
+      List<Long> list = new ArrayList<>(strings.length);
       for(String string: strings) {
          list.add(Long.valueOf(string));
       }
